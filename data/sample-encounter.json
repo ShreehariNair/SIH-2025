@@ -1,0 +1,15 @@
+{
+  "patientId": "PAT123",
+  "diagnoses": [
+    {
+      "namasteCode": "AYU001",
+      "icdCode": "MG50",
+      "display": "Jwara (Fever)"
+    },
+    {
+      "namasteCode": "AYU002",
+      "icdCode": "5A11",
+      "display": "Prameha (Diabetes)"
+    }
+  ]
+}
