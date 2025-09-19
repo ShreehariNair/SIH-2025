@@ -17,7 +17,7 @@ const loadCSV = async (filePath) => {
               { upsert: true }
             );
           }
-          resolve(" CSV data loaded successfully");
+          resolve("CSV data loaded successfully");
         } catch (err) {
           reject(err);
         }
