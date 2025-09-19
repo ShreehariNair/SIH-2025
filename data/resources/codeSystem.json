@@ -1,0 +1,10 @@
+{
+  "resourceType": "CodeSystem",
+  "id": "NAMASTE",
+  "url": "https://ayush.gov.in/",
+  "version": "2025-09",
+  "name": "NAMASTE",
+  "status": "active",
+  "experimental": true,
+  "content": "not-present"
+}
