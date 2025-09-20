@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AYUSH Dual Coding - Search Medical Codes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'green-primary': '#059669',
+                        'green-secondary': '#10b981',
+                        'green-light': '#d1fae5',
+                        'green-dark': '#047857',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .search-glow:focus {
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        .result-item {
+            transition: all 0.2s ease;
+        }
+        
+        .result-item:hover {
+            background-color: #f0fdf4;
+            border-color: #10b981;
+        }
+        
+        .loading-spinner {
+            border: 3px solid #d1fae5;
+            border-top: 3px solid #10b981;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .badge-namaste {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
+        
+        .badge-icd11 {
+            background: linear-gradient(135deg, #047857, #059669);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-gray-200 shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="text-green-600 text-2xl">🌿</div>
+                    <h1 class="text-gray-800 text-xl font-semibold">AYUSH</h1>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-800 hover:text-green-600 transition-colors duration-200">Home</a>
+                    <a href="Search-Codes.html" class="text-gray-800 hover:text-green-600 transition-colors duration-200">Search Codes</a>
+                    <a href="Encounter.html" class="text-gray-800 hover:text-green-600 transition-colors duration-200">Add Encounter</a>
+                    <a href="about.html" class="text-gray-800 hover:text-green-600 transition-colors duration-200">About</a>
+                    <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                        <span class="text-gray-600">👤</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="gradient-bg py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="text-6xl mb-4">🔍</div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Search Medical Codes</h1>
+            <p class="text-xl text-green-100 max-w-2xl mx-auto">
+                Find and explore NAMASTE and ICD-11 codes for diagnoses, treatments, and medical conditions
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Search Section -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8 card-hover">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Intelligent Code Search</h2>
+                <p class="text-gray-600">Enter symptoms, conditions, or treatments to find matching codes</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-4 max-w-4xl mx-auto">
+                <div class="flex-1 relative">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        placeholder="Search for conditions, symptoms, or treatments..."
+                        class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-0 search-glow text-lg transition-all duration-200"
+                    >
+                </div>
+                <button 
+                    onclick="searchCodes()" 
+                    class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                    <span class="flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        <span>Search</span>
+                    </span>
+                </button>
+            </div>
+
+            <!-- Quick Search Suggestions -->
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-500 mb-3">Quick searches:</p>
+                <div class="flex flex-wrap justify-center gap-2">
+                    <button onclick="quickSearch('fever')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">Fever</button>
+                    <button onclick="quickSearch('headache')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">Headache</button>
+                    <button onclick="quickSearch('stress')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">Stress</button>
+                    <button onclick="quickSearch('anxiety')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">Anxiety</button>
+                    <button onclick="quickSearch('cough')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">Cough</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- NAMASTE Results -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-green-600 to-green-500 p-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-3xl">🌿</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">NAMASTE Codes</h3>
+                            <p class="text-green-100">Traditional AYUSH System Codes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div id="namasteResults" class="space-y-4">
+                        <div class="text-center py-12 text-gray-500">
+                            <div class="text-4xl mb-4">🔍</div>
+                            <p class="text-lg">Enter a search term to find NAMASTE codes</p>
+                            <p class="text-sm mt-2">Search for Ayurveda, Yoga, Unani, Siddha, or Homeopathy treatments</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ICD-11 Results -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
+                <div class="bg-gradient-to-r from-green-700 to-green-600 p-6">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-3xl">🏥</div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">ICD-11 Codes</h3>
+                            <p class="text-green-100">International Classification Codes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div id="icd11Results" class="space-y-4">
+                        <div class="text-center py-12 text-gray-500">
+                            <div class="text-4xl mb-4">🌐</div>
+                            <p class="text-lg">Enter a search term to find ICD-11 codes</p>
+                            <p class="text-sm mt-2">International standard medical classification system</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Selected Codes Panel -->
+        <div id="selectedCodesPanel" class="hidden mt-8 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 p-8">
+            <div class="text-center mb-6">
+                <h3 class="text-2xl font-bold text-green-800 mb-2">Selected Medical Codes</h3>
+                <p class="text-green-600">Review your selected codes before proceeding</p>
+            </div>
+            <div id="selectedCodesList" class="space-y-3 mb-6"></div>
+            <div class="text-center">
+                <button 
+                    onclick="proceedToEncounter()" 
+                    class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                    <span class="flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <span>Proceed to Patient Encounter</span>
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <!-- <div class="mt-16 grid md:grid-cols-4 gap-6">
+            <div class="bg-white rounded-xl p-6 text-center shadow-lg card-hover">
+                <div class="text-3xl font-bold text-green-600 mb-2">1,000+</div>
+                <div class="text-gray-600 font-medium">NAMASTE Codes</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 text-center shadow-lg card-hover">
+                <div class="text-3xl font-bold text-green-600 mb-2">5,000+</div>
+                <div class="text-gray-600 font-medium">ICD-11 Mappings</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 text-center shadow-lg card-hover">
+                <div class="text-3xl font-bold text-green-600 mb-2">99.9%</div>
+                <div class="text-gray-600 font-medium">Accuracy Rate</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 text-center shadow-lg card-hover">
+                <div class="text-3xl font-bold text-green-600 mb-2">24/7</div>
+                <div class="text-gray-600 font-medium">System Uptime</div>
+            </div>
+        </div> -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="text-2xl">🏥</div>
+                        <h3 class="text-xl font-bold">AYUSH Dual Coding</h3>
+                    </div>
+                    <p class="text-gray-300">Bridging traditional and modern healthcare through innovative coding systems.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><a href="index.html" class="hover:text-green-400 transition-colors duration-200">Home</a></li>
+                        <li><a href="Search-Codes.html" class="hover:text-green-400 transition-colors duration-200">Search Codes</a></li>
+                        <li><a href="Encounter.html" class="hover:text-green-400 transition-colors duration-200">Patient Encounters</a></li>
+                        <li><a href="about.html" class="hover:text-green-400 transition-colors duration-200">About Project</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">SIH 2025</h4>
+                    <p class="text-gray-300 mb-2">Smart India Hackathon 2025</p>
+                    <p class="text-gray-300 mb-2">Healthcare Innovation</p>
+                    <p class="text-gray-300">AYUSH Ministry Challenge</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 AYUSH Dual Coding System. Built for Smart India Hackathon 2025.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let selectedCodes = [];
+
+        // Sample data for demonstration
+        const sampleNamasteCodes = [
+            { code: 'AYU001', display: 'Fever (Jwara)', category: 'Ayurveda', description: 'Traditional Ayurvedic treatment for fever conditions' },
+            { code: 'AYU002', display: 'Headache (Shiroroga)', category: 'Ayurveda', description: 'Ayurvedic approach to headache management' },
+            { code: 'AYU003', display: 'Digestive Issues (Agnimandya)', category: 'Ayurveda', description: 'Digestive fire imbalance treatment' },
+            { code: 'YOG001', display: 'Stress Management (Pranayama)', category: 'Yoga', description: 'Breathing techniques for stress relief' },
+            { code: 'YOG002', display: 'Anxiety Relief (Dhyana)', category: 'Yoga', description: 'Meditation practices for anxiety management' },
+            { code: 'UNA001', display: 'Cold (Nazla)', category: 'Unani', description: 'Unani treatment for common cold' },
+            { code: 'UNA002', display: 'Cough (Sual)', category: 'Unani', description: 'Traditional Unani cough remedies' },
+            { code: 'SID001', display: 'Digestive Issues (Ajirnam)', category: 'Siddha', description: 'Siddha medicine for digestion' },
+            { code: 'SID002', display: 'Joint Pain (Sandhi Vedana)', category: 'Siddha', description: 'Siddha treatment for joint disorders' },
+            { code: 'HOM001', display: 'Anxiety (Chinta)', category: 'Homeopathy', description: 'Homeopathic remedies for anxiety' },
+            { code: 'HOM002', display: 'Insomnia (Nidranasha)', category: 'Homeopathy', description: 'Homeopathic sleep disorder treatment' }
+        ];
+
+        const sampleICD11Codes = [
+            { code: 'MG50', display: 'Fever, unspecified', category: 'Symptoms', description: 'General fever without specific cause identified' },
+            { code: 'MB40.0', display: 'Tension-type headache', category: 'Neurological', description: 'Primary headache disorder' },
+            { code: 'DD90', display: 'Functional dyspepsia', category: 'Digestive', description: 'Digestive system functional disorder' },
+            { code: 'QE10', display: 'Stress-related disorders', category: 'Mental Health', description: 'Disorders related to stress and adjustment' },
+            { code: 'QA40', display: 'Anxiety disorders', category: 'Mental Health', description: 'Various forms of anxiety conditions' },
+            { code: 'CA40', display: 'Acute upper respiratory infections', category: 'Respiratory', description: 'Upper respiratory tract infections' },
+            { code: 'CA41', display: 'Cough', category: 'Respiratory', description: 'Cough as a symptom or condition' },
+            { code: 'DD91', display: 'Other specified diseases of digestive system', category: 'Digestive', description: 'Specific digestive system disorders' },
+            { code: 'FB50', display: 'Joint pain', category: 'Musculoskeletal', description: 'Pain in joints and related structures' },
+            { code: 'QA41', display: 'Generalized anxiety disorder', category: 'Mental Health', description: 'Persistent and excessive anxiety' },
+            { code: 'QC20', display: 'Sleep-wake disorders', category: 'Mental Health', description: 'Disorders affecting sleep patterns' }
+        ];
+
+        // Search functionality
+        function searchCodes() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            
+            if (!query) {
+                showAlert('Please enter a search term', 'warning');
+                return;
+            }
+
+            showLoadingState();
+            
+            // Simulate API call delay
+            setTimeout(() => {
+                displaySearchResults(query);
+            }, 1000);
+        }
+
+        function quickSearch(term) {
+            document.getElementById('searchInput').value = term;
+            searchCodes();
+        }
+
+        function showLoadingState() {
+            document.getElementById('namasteResults').innerHTML = `
+                <div class="text-center py-12">
+                    <div class="loading-spinner mx-auto mb-4"></div>
+                    <p class="text-gray-500">Searching NAMASTE codes...</p>
+                </div>
+            `;
+            
+            document.getElementById('icd11Results').innerHTML = `
+                <div class="text-center py-12">
+                    <div class="loading-spinner mx-auto mb-4"></div>
+                    <p class="text-gray-500">Searching ICD-11 codes...</p>
+                </div>
+            `;
+        }
+
+        function displaySearchResults(query) {
+            // Filter NAMASTE codes
+            const namasteResults = sampleNamasteCodes.filter(code => 
+                code.display.toLowerCase().includes(query) || 
+                code.code.toLowerCase().includes(query) ||
+                code.category.toLowerCase().includes(query) ||
+                code.description.toLowerCase().includes(query)
+            );
+
+            // Filter ICD-11 codes
+            const icd11Results = sampleICD11Codes.filter(code => 
+                code.display.toLowerCase().includes(query) || 
+                code.code.toLowerCase().includes(query) ||
+                code.category.toLowerCase().includes(query) ||
+                code.description.toLowerCase().includes(query)
+            );
+
+            // Display NAMASTE results
+            displayNamasteResults(namasteResults);
+            
+            // Display ICD-11 results
+            displayICD11Results(icd11Results);
+        }
+
+        function displayNamasteResults(results) {
+            const container = document.getElementById('namasteResults');
+            
+            if (results.length > 0) {
+                container.innerHTML = results.map(code => `
+                    <div class="result-item border-2 border-gray-200 rounded-xl p-4 transition-all duration-200 hover:border-green-300 hover:bg-green-50">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="badge-namaste text-white px-3 py-1 rounded-full text-sm font-semibold">${code.code}</span>
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">${code.category}</span>
+                                </div>
+                                <h4 class="font-semibold text-gray-800 mb-1">${code.display}</h4>
+                                <p class="text-sm text-gray-600">${code.description}</p>
+                            </div>
+                            <button 
+                                onclick="addCode('namaste', '${code.code}', '${code.display}', '${code.category}')"
+                                class="ml-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105"
+                            >
+                                + Add
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-500">
+                        <div class="text-4xl mb-4">🔍</div>
+                        <p class="text-lg">No NAMASTE codes found</p>
+                        <p class="text-sm mt-2">Try different search terms or browse categories</p>
+                    </div>
+                `;
+            }
+        }
+
+        function displayICD11Results(results) {
+            const container = document.getElementById('icd11Results');
+            
+            if (results.length > 0) {
+                container.innerHTML = results.map(code => `
+                    <div class="result-item border-2 border-gray-200 rounded-xl p-4 transition-all duration-200 hover:border-green-300 hover:bg-green-50">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="badge-icd11 text-white px-3 py-1 rounded-full text-sm font-semibold">${code.code}</span>
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">${code.category}</span>
+                                </div>
+                                <h4 class="font-semibold text-gray-800 mb-1">${code.display}</h4>
+                                <p class="text-sm text-gray-600">${code.description}</p>
+                            </div>
+                            <button 
+                                onclick="addCode('icd11', '${code.code}', '${code.display}', '${code.category}')"
+                                class="ml-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105"
+                            >
+                                + Add
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-500">
+                        <div class="text-4xl mb-4">🌐</div>
+                        <p class="text-lg">No ICD-11 codes found</p>
+                        <p class="text-sm mt-2">Try different search terms or browse categories</p>
+                    </div>
+                `;
+            }
+        }
+
+        function addCode(type, code, display, category) {
+            const existingCode = selectedCodes.find(c => c.code === code && c.type === type);
+            if (existingCode) {
+                showAlert('Code already selected', 'warning');
+                return;
+            }
+
+            selectedCodes.push({
+                type: type,
+                code: code,
+                display: display,
+                category: category,
+                timestamp: new Date().toISOString()
+            });
+
+            updateSelectedCodesPanel();
+            showAlert(`${type.toUpperCase()} code ${code} added successfully!`, 'success');
+        }
+
+        function updateSelectedCodesPanel() {
+            const panel = document.getElementById('selectedCodesPanel');
+            const list = document.getElementById('selectedCodesList');
+
+            if (selectedCodes.length > 0) {
+                panel.classList.remove('hidden');
+                panel.classList.add('fade-in');
+                
+                list.innerHTML = selectedCodes.map((code, index) => `
+                    <div class="bg-white rounded-xl p-4 border border-green-200 shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="${code.type === 'namaste' ? 'badge-namaste' : 'badge-icd11'} text-white px-3 py-1 rounded-full text-sm font-semibold">${code.code}</span>
+                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">${code.category}</span>
+                                    <span class="bg-${code.type === 'namaste' ? 'green' : 'blue'}-100 text-${code.type === 'namaste' ? 'green' : 'blue'}-800 px-2 py-1 rounded-full text-xs font-medium">${code.type.toUpperCase()}</span>
+                                </div>
+                                <h4 class="font-semibold text-gray-800">${code.display}</h4>
+                                <p class="text-xs text-gray-500 mt-1">Added: ${new Date(code.timestamp).toLocaleString()}</p>
+                            </div>
+                            <button 
+                                onclick="removeCode(${index})"
+                                class="ml-4 bg-red-100 hover:bg-red-200 text-red-600 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                            >
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                panel.classList.add('hidden');
+            }
+        }
+
+        function removeCode(index) {
+            const removedCode = selectedCodes[index];
+            selectedCodes.splice(index, 1);
+            updateSelectedCodesPanel();
+            showAlert(`Code ${removedCode.code} removed`, 'info');
+        }
+
+        function proceedToEncounter() {
+            if (selectedCodes.length === 0) {
+                showAlert('Please select at least one code before proceeding', 'warning');
+                return;
+            }
+            
+            showAlert(`Proceeding to encounter with ${selectedCodes.length} selected codes`, 'success');
+            // Here you would typically navigate to the encounter page
+            // window.location.href = '/encounter';
+        }
+
+        function showAlert(message, type) {
+            const alertColors = {
+                success: 'bg-green-100 border-green-400 text-green-700',
+                warning: 'bg-yellow-100 border-yellow-400 text-yellow-700',
+                error: 'bg-red-100 border-red-400 text-red-700',
+                info: 'bg-blue-100 border-blue-400 text-blue-700'
+            };
+
+            const alert = document.createElement('div');
+            alert.className = `fixed top-4 right-4 z-50 ${alertColors[type]} border px-4 py-3 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
+            alert.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-2 font-bold">&times;</button>
+                </div>
+            `;
+
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.classList.remove('translate-x-full');
+            }, 100);
+
+            setTimeout(() => {
+                alert.classList.add('translate-x-full');
+                setTimeout(() => alert.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add search on Enter key
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchCodes();
+                }
+            });
+
+            // Add focus effect to search input
+            document.getElementById('searchInput').addEventListener('focus', function() {
+                this.parentElement.classList.add('ring-2', 'ring-green-200');
+            });
+
+            document.getElementById('searchInput').addEventListener('blur', function() {
+                this.parentElement.classList.remove('ring-2', 'ring-green-200');
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9821de8db50a2967',t:'MTc1ODM3NzAzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+</body>
+</html>
