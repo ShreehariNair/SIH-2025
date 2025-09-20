@@ -1,15 +1,24 @@
 const mongoose = require("mongoose");
 
-const ProblemListSchema = new mongoose.Schema({
-  patientId: { type: String, required: true },
-  diagnoses: [
-    {
-      namasteCode: { type: String, required: true },
-      icdCode: { type: String },
-      display: { type: String },
-      recordedAt: { type: Date, default: Date.now }
-    }
-  ]
-}, { timestamps: true });
+const problemListSchema = new mongoose.Schema(
+  {
+    patientId: { type: String, required: true },
+    diagnoses: [
+      {
+        namaste: {
+          code: String,
+          display: String,
+        },
+        icd11: {
+          code: String,
+          display: String,
+        },
+        recordedAt: { type: Date, default: Date.now },
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
-module.exports = mongoose.model("ProblemList", ProblemListSchema);
+
+module.exports = mongoose.model("ProblemList", problemListSchema);

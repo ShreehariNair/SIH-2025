@@ -3,6 +3,6 @@ const { getCodeSystem } = require("./../controllers/codeController.js");
 
 const router = express.Router();
 
-router.get("/CodeSystem", getCodeSystem);
+router.get("/codesystem", getCodeSystem);
 
 module.exports = router;

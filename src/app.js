@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("/api/codes", codeRoutes);
 app.use("/api/encounters", encounterRoutes);
 
-app.use("/data", ingestionRoutes);
-app.use("/fhir", resourcesRoutes);
+app.use("/api/ingestion", ingestionRoutes);
+app.use("/api/resources", resourcesRoutes);
 
 module.exports = app;
