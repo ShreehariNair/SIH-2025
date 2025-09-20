@@ -11,10 +11,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/codes", codeRoutes);
-app.use("/api/encounters", encounterRoutes);
+app.use("/api/v1/codes", codeRoutes);
+app.use("/api/v1/encounters", encounterRoutes);
 
-app.use("/api/ingestion", ingestionRoutes);
-app.use("/api/resources", resourcesRoutes);
+app.use("/api/v1/ingestion", ingestionRoutes);
+app.use("/api/v1/resources/", resourcesRoutes);
 
 module.exports = app;

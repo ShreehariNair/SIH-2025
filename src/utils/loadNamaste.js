@@ -5,7 +5,7 @@ let namasteCSV = [];
 exports.loadNamaste = async function (filePath = "data/namaste_ayurveda.csv") {
   return new Promise((resolve, reject) => {
     try {
-      fs.createReadStream(filePath, (encoding = "utf8"))
+      fs.createReadStream(filePath, { encoding: "utf8" })
         .pipe(csv())
         .on("data", (data) => namasteCSV.push(data))
         .on("end", () => {

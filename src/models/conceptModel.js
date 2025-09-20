@@ -15,6 +15,10 @@ const conceptSchema = new mongoose.Schema(
       //   required: [true, "A concept must have a definition"],
     },
     designation: [{ language: String, value: String }],
+    ICD11Code: {
+      type: String,
+      select: false,
+    },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
