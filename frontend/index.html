@@ -74,10 +74,10 @@
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight">AYUSH Dual Coding System</h1>
                     <p class="mt-4 max-w-3xl mx-auto text-lg sm:text-xl text-slate-300">Bridging NAMASTE and ICD-11 for interoperable healthcare</p>
                     <div class="mt-10 flex flex-wrap justify-center gap-4">
-                        <button class="px-8 py-3 bg-primary text-slate-900 font-bold rounded-lg hover:bg-opacity-90 transition-all transform hover:scale-105">
+                        <button id="searchCodesBtn" class="px-8 py-3 bg-primary text-slate-900 font-bold rounded-lg hover:bg-opacity-90 transition-all transform hover:scale-105">
                             Search Codes
                         </button>
-                        <button class="px-8 py-3 bg-primary/20 dark:bg-primary/30 text-white font-bold rounded-lg hover:bg-primary/30 dark:hover:bg-primary/40 transition-all transform hover:scale-105">
+                        <button id="addEncounterBtn" class="px-8 py-3 bg-primary/20 dark:bg-primary/30 text-white font-bold rounded-lg hover:bg-primary/30 dark:hover:bg-primary/40 transition-all transform hover:scale-105">
                             Add Encounter
                         </button>
                     </div>
@@ -187,5 +187,33 @@
     </div>
   </footer>
     </div>
+    <script>
+    const searchCodesBtn = document.querySelector('#searchCodesBtn');
+    const addEncounterBtn = document.querySelector('#addEncounterBtn');
+    const namasteStat = document.querySelector('div:nth-child(2) > div:nth-child(1) span'); // NAMASTE Codes stat
+    const icdStat = document.querySelector('div:nth-child(2) > div:nth-child(2) span'); // ICD-11 Mappings stat
+
+    searchCodesBtn.addEventListener('click', () => {
+        window.location.href = '/Search-Codes.html';
+    });
+
+    addEncounterBtn.addEventListener('click', () => {
+        window.location.href = '/Encounter.html';
+    });
+
+    async function fetchStats() {
+        try {
+            const res = await fetch('http://localhost:5000/api/v1/resources/codesystem');
+            const data = await res.json();
+            namasteStat.textContent = data.namaste?.length || '1,247';
+            icdStat.textContent = data.icd?.length || '5,892';
+        } catch (error) {
+            console.error('Error:', error);
+            namasteStat.textContent = '1,247'; // Fallback
+            icdStat.textContent = '5,892'; // Fallback
+        }
+    }
+    window.addEventListener('load', fetchStats);
+</script>
 </body>
 </html>

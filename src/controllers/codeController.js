@@ -1,5 +1,5 @@
-const conceptMapFormat = require("./../../data/resources/conceptMap.js");
 const NamasteCode = require("./../models/NamasteCode");
+const ICD11Code = require("./../models/ICD11Code"); 
 const loadCSV = require("../utils/csvLoader");
 const { loadNamaste } = require("./../utils/loadNamaste.js");
 const Concept = require("./../models/conceptModel.js");
@@ -7,10 +7,20 @@ const ConceptMap = require("./../models/conceptMapModel.js");
 
 exports.searchCodes = async (req, res) => {
   try {
-    const { q } = req.query;
-    const codes = await NamasteCode.find({
-      display: { $regex: q, $options: "i" },
-    }).limit(20);
+    const { query, type } = req.query; 
+    let codes;
+
+    if (type === 'namaste') {
+        codes = await NamasteCode.find({
+            display: { $regex: query, $options: "i" }
+        }).limit(20);
+    } else if (type === 'icd') {
+        codes = await ICD11Code.find({
+            display: { $regex: query, $options: "i" }
+        }).limit(20);
+    } else {
+        return res.status(400).json({ error: 'Invalid code type specified.' });
+    }
     res.json(codes);
   } catch (err) {
     res.status(500).json({ error: err.message });

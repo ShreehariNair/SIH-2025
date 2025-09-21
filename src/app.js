@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const codeRoutes = require("./routes/codeRoutes");
 const encounterRoutes = require("./routes/encounterRoutes");
@@ -8,6 +9,7 @@ const resourcesRoutes = require("./routes/resourcesRoutes");
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, "../frontend")));
 app.use(cors());
 app.use(express.json());
 

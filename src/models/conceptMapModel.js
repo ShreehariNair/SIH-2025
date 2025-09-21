@@ -351,5 +351,5 @@ const conceptMapSchema = new mongoose.Schema({
   ],
 });
 
-const ConceptMap = mongoose.Model("conceptMap", conceptMapSchema);
+const ConceptMap = mongoose.model("conceptMap", conceptMapSchema);
 module.export = ConceptMap;
