@@ -19,6 +19,7 @@
         },
       };
     </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
       body {
@@ -135,53 +136,45 @@
         width: 2px;
         background: #d1fae5;
       }
+
+      .alert-box {
+        position: fixed;
+        top: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+      }
     </style>
   </head>
   <body class="bg-gray-50 min-h-screen">
     <!-- Navigation -->
-    <nav class="bg-gray-100 shadow-lg sticky top-0 z-50">
-      <div
-        class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16"
-      >
-        <div class="flex items-center space-x-2">
-          <div class="text-green-500 text-2xl">🏥</div>
-          <h1 class="text-xl font-semibold text-gray-800">AYUSH</h1>
-        </div>
-        <div class="flex space-x-6">
-          <a
-            href="index.html"
-            class="text-gray-700 hover:text-green-600 transition-colors duration-200"
-            >Home</a
-          >
-          <a
-            href="Search-Codes.html"
-            class="text-gray-700 hover:text-green-600 transition-colors duration-200"
-            >Search Codes</a
-          >
-          <a
-            href="Encounter.html"
-            class="text-gray-700 hover:text-green-600 transition-colors duration-200"
-            >Add Encounter</a
-          >
-          <a
-            href="about.html"
-            class="text-gray-700 hover:text-green-600 transition-colors duration-200"
-            >About</a
-          >
-        </div>
-        <div class="flex items-center">
-          <button class="text-gray-500 hover:text-gray-700 focus:outline-none">
-            <span class="sr-only">User menu</span>
-            <img
-              src="https://via.placeholder.com/30"
-              alt="User profile"
-              class="w-8 h-8 rounded-full"
-            />
-          </button>
+    <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-4">
+            <!-- Green Icon -->
+            <div class="text-green-600 size-8">
+              <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
+              </svg>
+            </div>
+            <!-- AYUSH Heading in Black -->
+            <h2 class="text-lg font-bold text-black">AYUSH</h2>
+          </div>
+          <!-- Navbar -->
+          <nav class="hidden md:flex items-center gap-8">
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="Search-Codes.html">Search Codes</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="Encounter.html">Add Encounter</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+          </nav>
+          <!-- Profile Section -->
+          <div class="flex items-center gap-4">
+           <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("Logo.png");'></div>
         </div>
       </div>
-    </nav>
-    <div id="alertBox" class="p-2 text-center"></div>
+    </header>
+
     <!-- Header Section -->
     <div class="gradient-bg py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -287,7 +280,7 @@
               Patient P003
             </button>
             <button
-              onclick="createNewPatient()"
+              onclick="showCreatePatientModal()"
               class="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm hover:bg-blue-200 transition-colors duration-200"
             >
               + New Patient
@@ -295,40 +288,40 @@
           </div>
         </div>
       </div>
-<div id="newPatientModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden transition-opacity duration-300">
-    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-lg w-full transform scale-95 transition-transform duration-300">
-        <div class="flex justify-between items-center mb-6">
+      <div id="newPatientModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden transition-opacity duration-300">
+        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-lg w-full transform scale-95 transition-transform duration-300">
+          <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold text-gray-800">New Patient</h2>
             <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-        </div>
-        <form id="newPatientForm" class="space-y-4">
+          </div>
+          <form id="newPatientForm" class="space-y-4">
             <div class="flex flex-col">
-                <label for="newPatientId" class="text-sm font-medium text-gray-700">Patient ID <span class="text-red-500">*</span></label>
-                <input type="text" id="newPatientId" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50" placeholder="Enter patient ID">
+              <label for="newPatientId" class="text-sm font-medium text-gray-700">Patient ID <span class="text-red-500">*</span></label>
+              <input type="text" id="newPatientId" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50" placeholder="Enter patient ID">
             </div>
             <div class="flex flex-col">
-                <label for="newPatientName" class="text-sm font-medium text-gray-700">Patient Name <span class="text-red-500">*</span></label>
-                <input type="text" id="newPatientName" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50" placeholder="Enter patient name">
+              <label for="newPatientName" class="text-sm font-medium text-gray-700">Patient Name <span class="text-red-500">*</span></label>
+              <input type="text" id="newPatientName" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50" placeholder="Enter patient name">
             </div>
             <div class="flex flex-col">
-                <label for="newPatientDob" class="text-sm font-medium text-gray-700">Date of Birth</label>
-                <input type="date" id="newPatientDob" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50">
+              <label for="newPatientDob" class="text-sm font-medium text-gray-700">Date of Birth</label>
+              <input type="date" id="newPatientDob" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50">
             </div>
             <div class="flex flex-col">
-                <label for="newPatientGender" class="text-sm font-medium text-gray-700">Gender</label>
-                <select id="newPatientGender" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50">
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
+              <label for="newPatientGender" class="text-sm font-medium text-gray-700">Gender</label>
+              <select id="newPatientGender" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
             <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">Create Patient</button>
-        </form>
-    </div>
-</div>
+          </form>
+        </div>
+      </div>
       <!-- Patient Information Display -->
       <div id="patientInfoSection" class="hidden mb-8">
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
@@ -571,91 +564,97 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12 mt-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid md:grid-cols-3 gap-8">
-          <div>
-            <div class="flex items-center space-x-2 mb-4">
-              <div class="text-2xl">🏥</div>
-              <h3 class="text-xl font-bold">AYUSH Dual Coding</h3>
-            </div>
-            <p class="text-gray-300">
-              Advanced patient encounter management with dual coding system
-              integration.
-            </p>
-          </div>
-          <div>
-            <h4 class="text-lg font-semibold mb-4">Features</h4>
-            <ul class="space-y-2 text-gray-300">
-              <li>• Dual coding system (NAMASTE + ICD-11)</li>
-              <li>• Patient history tracking</li>
-              <li>• Clinical notes management</li>
-              <li>• Export functionality</li>
-            </ul>
-          </div>
-          <div>
-            <h4 class="text-lg font-semibold mb-4">SIH 2024</h4>
-            <p class="text-gray-300 mb-2">Smart India Hackathon 2024</p>
-            <p class="text-gray-300 mb-2">Healthcare Innovation</p>
-            <p class="text-gray-300">AYUSH Ministry Challenge</p>
+    <footer class="bg-gray-800 text-gray-300 mt-auto">
+      <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Column 1 -->
+        <div>
+          <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
+            <i class="fa-solid fa-heart-pulse"></i> AYUSH Dual Coding
+          </h3>
+          <p class="mt-2 text-sm">
+            Professional medical coding platform for healthcare integration
+          </p>
+          <div class="mt-3 flex space-x-4 text-sm">
+            <a href="#" class="hover:text-white">Privacy Policy</a>
+            <a href="#" class="hover:text-white">Terms of Service</a>
           </div>
         </div>
-        <div
-          class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400"
-        >
-          <p>
-            &copy; 2024 AYUSH Dual Coding System. Built for Smart India
-            Hackathon 2024.
-          </p>
+        <!-- Column 2 -->
+        <div>
+          <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
+            <i class="fa-solid fa-link"></i> Navigation
+          </h3>
+          <ul class="mt-2 space-y-2 text-sm">
+            <li><a href="index1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-home"></i>Home</a></li>
+            <li><a href="Search-Codes1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-magnifying-glass"></i>Search Codes</a></li>
+            <li><a href="Encounter1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-regular fa-file-lines"></i>Add Encounter</a></li>
+            <li><a href="about1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-circle-info"></i>About</a></li>
+          </ul>
+        </div>
+        <!-- Column 3 -->
+        <div>
+          <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
+            <i class="fa-solid fa-award"></i> SIH 2025
+          </h3>
+          <ul class="mt-2 space-y-2 text-sm">
+            <li>Smart India Hackathon 2025</li>
+            <li>Team Elite ES6</li>
+            <li>Ministry of AYUSH</li>
+          </ul>
         </div>
       </div>
+      <!-- Bottom copyright -->
+      <div class="border-t border-gray-600 text-center py-4 text-sm">
+        © 2025 AYUSH Dual Coding System. All rights reserved.
+      </div>
     </footer>
-    <script>
-    let currentPatient = null;
-    let currentSession = [];
 
-    // Fetches patient data from the backend based on Patient ID
-    async function fetchPatientData() {
+    <script>
+      let currentPatient = null;
+      let currentSession = [];
+
+      // Fetches patient data from the backend based on Patient ID
+      async function fetchPatientData() {
         const patientId = document.getElementById('patientIdInput').value.trim().toUpperCase();
         if (!patientId) {
-            showAlert('Please enter a Patient ID', 'warning');
-            return;
+          showAlert('Please enter a Patient ID', 'warning');
+          return;
         }
 
         try {
-            const res = await fetch(`http://localhost:5000/api/v1/encounters/${patientId}`);
-            if (!res.ok) {
-                if (res.status === 404) {
-                    showAlert(`Patient ID ${patientId} not found. You can create a new record by adding their details and saving.`, 'info');
-                    // Clear patient info fields for new patient
-                    document.getElementById('patientNameInput').value = '';
-                    document.getElementById('patientDobInput').value = '';
-                    document.getElementById('patientGenderInput').value = '';
-                    currentPatient = null;
-                    return;
-                }
-                throw new Error("Failed to fetch patient data.");
+          const res = await fetch(`http://localhost:5000/api/v1/encounters/${patientId}`);
+          if (!res.ok) {
+            if (res.status === 404) {
+              showAlert(`Patient ID ${patientId} not found. You can create a new record by adding their details and saving.`, 'info');
+              // Clear patient info fields for new patient
+              document.getElementById('patientNameInput').value = '';
+              document.getElementById('patientDobInput').value = '';
+              document.getElementById('patientGenderInput').value = '';
+              currentPatient = null;
+              return;
             }
-            const data = await res.json();
-            currentPatient = data;
-            displayPatientInfo(currentPatient);
-            displayPatientHistory(currentPatient);
-            document.getElementById('patientInfoSection').classList.remove('hidden');
-            document.getElementById('patientHistorySection').classList.remove('hidden');
-            showAlert(`Patient ${currentPatient.name} loaded successfully!`, 'success');
+            throw new Error("Failed to fetch patient data.");
+          }
+          const data = await res.json();
+          currentPatient = data;
+          displayPatientInfo(currentPatient);
+          displayPatientHistory(currentPatient);
+          document.getElementById('patientInfoSection').classList.remove('hidden');
+          document.getElementById('patientHistorySection').classList.remove('hidden');
+          showAlert(`Patient ${currentPatient.name} loaded successfully!`, 'success');
         } catch (err) {
-            showAlert(err.message, 'error');
-            console.error("Fetch patient data error:", err);
+          showAlert(err.message, 'error');
+          console.error("Fetch patient data error:", err);
         }
-    }
+      }
 
-    function quickPatientSearch(patientId) {
+      function quickPatientSearch(patientId) {
         document.getElementById('patientIdInput').value = patientId;
         fetchPatientData();
-    }
+      }
 
-    // Adds a diagnosis to the current session
-    function addDiagnosis() {
+      // Adds a diagnosis to the current session
+      function addDiagnosis() {
         const namasteSelect = document.getElementById('namasteCodeSelect');
         const icd11Select = document.getElementById('icd11CodeSelect');
         const clinicalNotes = document.getElementById('clinicalNotes').value.trim();
@@ -666,15 +665,15 @@
         const icd11Display = icd11Select.value.split('|')[1];
 
         if (!namasteCode || !icd11Code) {
-            showAlert("Please select both NAMASTE and ICD-11 codes", "warning");
-            return;
+          showAlert("Please select both NAMASTE and ICD-11 codes", "warning");
+          return;
         }
 
         const newDiagnosis = {
-            namaste: { code: namasteCode, display: namasteDisplay },
-            icd11: { code: icd11Code, display: icd11Display },
-            notes: clinicalNotes,
-            recordedAt: new Date().toISOString()
+          namaste: { code: namasteCode, display: namasteDisplay },
+          icd11: { code: icd11Code, display: icd11Display },
+          notes: clinicalNotes,
+          recordedAt: new Date().toISOString()
         };
 
         currentSession.push(newDiagnosis);
@@ -685,211 +684,208 @@
         icd11Select.value = "";
         document.getElementById('clinicalNotes').value = "";
         showAlert("Diagnosis added to current session!", "success");
-    }
+      }
 
-    // Updates the current session display section
-    function updateCurrentSession() {
+      // Updates the current session display section
+      function updateCurrentSession() {
         const sessionContent = document.getElementById('currentSessionContent');
         sessionContent.innerHTML = '';
         const sessionActions = document.getElementById('sessionActions');
 
         if (currentSession.length === 0) {
-            sessionContent.innerHTML = `
-                <div class="text-center py-8 text-gray-500">
-                    <div class="text-4xl mb-4">📋</div>
-                    <p>No diagnoses added yet</p>
-                    <p class="text-sm mt-2">Add diagnoses to start building the encounter</p>
-                </div>
-            `;
-            sessionActions.classList.add('hidden');
+          sessionContent.innerHTML = `
+            <div class="text-center py-8 text-gray-500">
+              <div class="text-4xl mb-4">📋</div>
+              <p>No diagnoses added yet</p>
+              <p class="text-sm mt-2">Add diagnoses to start building the encounter</p>
+            </div>
+          `;
+          sessionActions.classList.add('hidden');
         } else {
-            const listHtml = currentSession.map((diag, index) => `
-                <div class="p-4 bg-gray-100 rounded-lg flex items-start space-x-4 slide-in">
-                    <div class="flex-1">
-                        <div class="flex items-center space-x-2 mb-2">
-                            <span class="px-3 py-1 text-xs font-semibold rounded-full badge-namaste text-white">${diag.namaste.code}</span>
-                            <span class="px-3 py-1 text-xs font-semibold rounded-full badge-icd11 text-white">${diag.icd11.code}</span>
-                        </div>
-                        <p class="text-gray-800 font-medium">${diag.namaste.display} / ${diag.icd11.display}</p>
-                        ${diag.notes ? `<p class="text-sm text-gray-600 mt-1">Notes: ${diag.notes}</p>` : ''}
-                    </div>
-                    <button onclick="removeDiagnosis(${index})" class="text-red-500 hover:text-red-700 transition-colors duration-200">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </button>
+          const listHtml = currentSession.map((diag, index) => `
+            <div class="p-4 bg-gray-100 rounded-lg flex items-start space-x-4 slide-in">
+              <div class="flex-1">
+                <div class="flex items-center space-x-2 mb-2">
+                  <span class="px-3 py-1 text-xs font-semibold rounded-full badge-namaste text-white">${diag.namaste.code}</span>
+                  <span class="px-3 py-1 text-xs font-semibold rounded-full badge-icd11 text-white">${diag.icd11.code}</span>
                 </div>
-            `).join('');
+                <p class="text-gray-800 font-medium">${diag.namaste.display} / ${diag.icd11.display}</p>
+                ${diag.notes ? `<p class="text-sm text-gray-600 mt-1">Notes: ${diag.notes}</p>` : ''}
+              </div>
+              <button onclick="removeDiagnosis(${index})" class="text-red-500 hover:text-red-700 transition-colors duration-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
+          `).join('');
 
-            sessionContent.innerHTML = listHtml;
-            sessionActions.classList.remove('hidden');
+          sessionContent.innerHTML = listHtml;
+          sessionActions.classList.remove('hidden');
         }
-    }
+      }
 
-    function removeDiagnosis(index) {
+      function removeDiagnosis(index) {
         currentSession.splice(index, 1);
         updateCurrentSession();
         showAlert("Diagnosis removed from session", "info");
-    }
+      }
 
-    async function saveEncounter() {
+      async function saveEncounter() {
         if (!currentPatient) {
-            const patientId = document.getElementById('patientIdInput').value.trim();
-            const patientName = document.getElementById('patientNameInput')?.value.trim();
-            const patientDob = document.getElementById('patientDobInput')?.value;
-            const patientGender = document.getElementById('patientGenderInput')?.value;
+          const patientId = document.getElementById('patientIdInput').value.trim();
+          const patientName = document.getElementById('patientNameInput')?.value.trim();
+          const patientDob = document.getElementById('patientDobInput')?.value;
+          const patientGender = document.getElementById('patientGenderInput')?.value;
 
-            if (!patientId || !patientName) {
-                showAlert('Please enter Patient ID and Name to create a new record', 'warning');
-                return;
-            }
+          if (!patientId || !patientName) {
+            showAlert('Please enter Patient ID and Name to create a new record', 'warning');
+            return;
+          }
 
-            currentPatient = {
-                patientId: patientId,
-                name: patientName,
-                dob: patientDob,
-                gender: patientGender,
-            };
+          currentPatient = {
+            patientId: patientId,
+            name: patientName,
+            dob: patientDob,
+            gender: patientGender,
+          };
         }
         
         if (currentSession.length === 0) {
-            showAlert('Please add at least one diagnosis to save', 'warning');
-            return;
+          showAlert('Please add at least one diagnosis to save', 'warning');
+          return;
         }
 
         const payload = {
-            patientId: currentPatient.patientId,
-            patientName: currentPatient.name,
-            patientDob: currentPatient.dob,
-            patientGender: currentPatient.gender,
-            diagnoses: currentSession
+          patientId: currentPatient.patientId,
+          patientName: currentPatient.name,
+          patientDob: currentPatient.dob,
+          patientGender: currentPatient.gender,
+          diagnoses: currentSession
         };
 
         try {
-            const res = await fetch("http://localhost:5000/api/v1/encounters/upload", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
+          const res = await fetch("http://localhost:5000/api/v1/encounters/upload", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
 
-            if (!res.ok) throw new Error("Failed to save encounter");
+          if (!res.ok) throw new Error("Failed to save encounter");
 
-            const updatedPatient = await res.json();
-            currentPatient = updatedPatient;
-            currentSession = [];
-            
-            updateCurrentSession();
-            displayPatientInfo(currentPatient);
-            displayPatientHistory(currentPatient);
+          const updatedPatient = await res.json();
+          currentPatient = updatedPatient;
+          currentSession = [];
+          
+          updateCurrentSession();
+          displayPatientInfo(currentPatient);
+          displayPatientHistory(currentPatient);
 
-            showAlert("Encounter saved to database!", "success");
+          showAlert("Encounter saved to database!", "success");
         } catch (err) {
-            showAlert("Error saving encounter: " + err.message, "error");
-            console.error("Save encounter error:", err);
+          showAlert("Error saving encounter: " + err.message, "error");
+          console.error("Save encounter error:", err);
         }
-    }
-    
-    // Display patient info in the header section
-    function displayPatientInfo(patient) {
+      }
+      
+      // Display patient info in the header section
+      function displayPatientInfo(patient) {
         document.getElementById('patientName').textContent = patient.name;
         document.getElementById('displayPatientId').textContent = patient.patientId;
         document.getElementById('patientDetails').textContent = `DOB: ${new Date(patient.dob).toLocaleDateString()} | Gender: ${patient.gender}`;
         document.getElementById('totalEncounters').textContent = patient.encounters.length;
         document.getElementById('activeDiagnoses').textContent = patient.activeDiagnoses;
         document.getElementById('lastVisit').textContent = patient.lastVisit ? new Date(patient.lastVisit).toLocaleDateString() : 'N/A';
-    }
+      }
 
-    // Display patient history timeline
-    function displayPatientHistory(patient) {
+      // Display patient history timeline
+      function displayPatientHistory(patient) {
         const historyContent = document.getElementById('patientHistoryContent');
         historyContent.innerHTML = '';
         if (patient.encounters.length === 0) {
-            historyContent.innerHTML = `<div class="text-center py-8 text-gray-500"><div class="text-4xl mb-4">📜</div><p>No past encounters found for this patient.</p></div>`;
-            return;
+          historyContent.innerHTML = `<div class="text-center py-8 text-gray-500"><div class="text-4xl mb-4">📜</div><p>No past encounters found for this patient.</p></div>`;
+          return;
         }
 
         const sortedEncounters = patient.encounters.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         historyContent.innerHTML = sortedEncounters.map((encounter, index) => {
-            const date = new Date(encounter.date).toLocaleDateString();
-            const diagnosesHtml = encounter.diagnoses.map(diag => `
-                <div class="mt-2 text-sm">
-                    <span class="font-semibold text-gray-800">${diag.namaste?.code}</span>
-                    <span class="text-gray-600">- ${diag.namaste?.display}</span>
-                    <span class="text-gray-400"> (ICD-11: ${diag.icd11?.code})</span>
-                </div>
-            `).join('');
+          const date = new Date(encounter.date).toLocaleDateString();
+          const diagnosesHtml = encounter.diagnoses.map(diag => `
+            <div class="mt-2 text-sm">
+              <span class="font-semibold text-gray-800">${diag.namaste?.code}</span>
+              <span class="text-gray-600">- ${diag.namaste?.display}</span>
+              <span class="text-gray-400"> (ICD-11: ${diag.icd11?.code})</span>
+            </div>
+          `).join('');
 
-            return `
-                <div class="relative pl-6 pb-8 timeline-item">
-                    ${index < sortedEncounters.length - 1 ? '<div class="timeline-line"></div>' : ''}
-                    <div class="mb-2">
-                        <span class="text-sm font-semibold text-gray-700">${date}</span>
-                    </div>
-                    ${diagnosesHtml}
-                </div>
-            `;
+          return `
+            <div class="relative pl-6 pb-8 timeline-item">
+              ${index < sortedEncounters.length - 1 ? '<div class="timeline-line"></div>' : ''}
+              <div class="mb-2">
+                <span class="text-sm font-semibold text-gray-700">${date}</span>
+              </div>
+              ${diagnosesHtml}
+            </div>
+          `;
         }).join('');
-    }
-    
-    function showAlert(message, type) {
-        const alertBox = document.getElementById("alertBox");
+      }
+      
+      function showAlert(message, type) {
+        const existingAlert = document.querySelector('.alert-box');
+        if (existingAlert) existingAlert.remove();
+
+        const alertBox = document.createElement('div');
+        alertBox.className = `alert-box p-3 border rounded-lg shadow-lg fade-in`;
         const alertColors = {
-            success: 'bg-green-100 border-green-400 text-green-700',
-            warning: 'bg-yellow-100 border-yellow-400 text-yellow-700',
-            error: 'bg-red-100 border-red-400 text-red-700',
-            info: 'bg-blue-100 border-blue-400 text-blue-700'
+          success: 'bg-green-100 border-green-400 text-green-700',
+          warning: 'bg-yellow-100 border-yellow-400 text-yellow-700',
+          error: 'bg-red-100 border-red-400 text-red-700',
+          info: 'bg-blue-100 border-blue-400 text-blue-700'
         };
 
-        alertBox.innerHTML = `
-            <div class="flex items-center space-x-2 p-3 border rounded-lg shadow-lg ${alertColors[type]}">
-                <span>${message}</span>
-            </div>
-        `;
-        alertBox.classList.add('fade-in');
+        alertBox.className += ` ${alertColors[type]}`;
+        alertBox.innerHTML = `<span>${message}</span>`;
+        document.body.appendChild(alertBox);
 
         setTimeout(() => {
-            alertBox.classList.remove('fade-in');
-            alertBox.innerHTML = "";
+          alertBox.classList.remove('fade-in');
+          alertBox.classList.add('opacity-0');
+          setTimeout(() => alertBox.remove(), 300);
         }, 3000);
-    }
+      }
 
-    // Initial load and event listeners
-    document.addEventListener('DOMContentLoaded', () => {
+      // Initial load and event listeners
+      document.addEventListener('DOMContentLoaded', () => {
         // Check for any codes from localStorage and populate session
         const selectedCodesString = localStorage.getItem('selectedCodes');
         if (selectedCodesString) {
-            currentSession = JSON.parse(selectedCodesString);
-            updateCurrentSession();
-            localStorage.removeItem('selectedCodes');
+          currentSession = JSON.parse(selectedCodesString);
+          updateCurrentSession();
+          localStorage.removeItem('selectedCodes');
         }
+      });
 
-        // Add event listeners for the buttons
-        document.getElementById('fetchPatientBtn').addEventListener('click', fetchPatientData);
-        document.getElementById('addDiagnosisBtn').addEventListener('click', addDiagnosis);
-        document.getElementById('saveEncounterBtn').addEventListener('click', saveEncounter);
-        document.getElementById('clearSessionBtn').addEventListener('click', clearSession);
-    });
-    function showCreatePatientModal() {
+      function showCreatePatientModal() {
         const modal = document.getElementById('newPatientModal');
         modal.classList.remove('hidden');
         modal.querySelector('div').classList.remove('scale-95');
         modal.querySelector('div').classList.add('scale-100');
-    }
-    
-    // Close the modal and reset the form
-    function closeModal() {
+      }
+      
+      // Close the modal and reset the form
+      function closeModal() {
         const modal = document.getElementById('newPatientModal');
         modal.querySelector('div').classList.remove('scale-100');
         modal.querySelector('div').classList.add('scale-95');
         setTimeout(() => {
-            modal.classList.add('hidden');
-            document.getElementById('newPatientForm').reset();
+          modal.classList.add('hidden');
+          document.getElementById('newPatientForm').reset();
         }, 300);
-    }
+      }
 
-    // New patient creation function, called from the modal form submission
-    async function createNewPatientFromModal(event) {
+      // New patient creation function, called from the modal form submission
+      async function createNewPatientFromModal(event) {
         event.preventDefault(); // Prevents the form from submitting in the traditional way
         
         const patientId = document.getElementById('newPatientId').value.trim();
@@ -898,55 +894,54 @@
         const patientGender = document.getElementById('newPatientGender').value;
         
         if (!patientId || !patientName) {
-            showAlert('Patient ID and Name are required.', 'warning');
-            return;
+          showAlert('Patient ID and Name are required.', 'warning');
+          return;
         }
 
         const payload = {
-            patientId: patientId,
-            patientName: patientName,
-            patientDob: patientDob,
-            patientGender: patientGender,
-            diagnoses: []
+          patientId: patientId,
+          patientName: patientName,
+          patientDob: patientDob,
+          patientGender: patientGender,
+          diagnoses: []
         };
 
         try {
-            const res = await fetch("http://localhost:5000/api/v1/encounters/upload", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
-            });
-            
-            if (!res.ok) {
-                if (res.status === 409) {
-                    showAlert(`Patient ID ${patientId} already exists.`, 'error');
-                } else {
-                    throw new Error("Failed to create new patient");
-                }
-                return;
+          const res = await fetch("http://localhost:5000/api/v1/encounters/upload", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          
+          if (!res.ok) {
+            if (res.status === 409) {
+              showAlert(`Patient ID ${patientId} already exists.`, 'error');
+            } else {
+              throw new Error("Failed to create new patient");
             }
-            
-            const newPatient = await res.json();
-            currentPatient = newPatient;
-            displayPatientInfo(currentPatient);
-            closeModal(); // Close the modal on success
-            
-            document.getElementById('patientInfoSection').classList.remove('hidden');
-            document.getElementById('patientHistorySection').classList.remove('hidden');
-            showAlert(`New patient record for ${newPatient.name} created successfully!`, 'success');
-
+            return;
+          }
+          
+          const newPatient = await res.json();
+          currentPatient = newPatient;
+          displayPatientInfo(currentPatient);
+          closeModal(); // Close the modal on success
+          
+          document.getElementById('patientInfoSection').classList.remove('hidden');
+          document.getElementById('patientHistorySection').classList.remove('hidden');
+          showAlert(`New patient record for ${newPatient.name} created successfully!`, 'success');
         } catch (err) {
-            showAlert("Error creating new patient: " + err.message, "error");
-            console.error("Create new patient error:", err);
+          showAlert("Error creating new patient: " + err.message, "error");
+          console.error("Create new patient error:", err);
         }
-    }
-    
-    // Listen for the form submission
-    document.getElementById('newPatientForm').addEventListener('submit', createNewPatientFromModal);
-    
-    // Attach the modal opening function to the button
-    document.querySelector('.px-4.py-2.bg-blue-100').addEventListener('click', showCreatePatientModal);
-</script>
+      }
+      
+      // Listen for the form submission
+      document.getElementById('newPatientForm').addEventListener('submit', createNewPatientFromModal);
+      
+      // Attach the modal opening function to the button
+      document.querySelector('.px-4.py-2.bg-blue-100').addEventListener('click', showCreatePatientModal);
+    </script>
 
     <script>
       (function () {

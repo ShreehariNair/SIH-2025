@@ -19,6 +19,7 @@
             }
         }
     </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
@@ -87,25 +88,33 @@
 </head>
 <body class="bg-gray-50 min-h-screen">
     <!-- Navigation -->
-    <nav class="bg-gray-200 shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center space-x-2">
-                    <div class="text-green-600 text-2xl">🌿</div>
-                    <h1 class="text-gray-800 text-xl font-semibold">AYUSH</h1>
-                </div>
-                <div class="flex items-center space-x-6">
-                    <a href="index.html" class="text-gray-800 hover:text-green-600 transition-colors duration-200">Home</a>
-                    <a href="Search-Codes.html" class="text-gray-800 hover:text-green-600 transition-colors duration-200">Search Codes</a>
-                    <a href="Encounter.html" class="text-gray-800 hover:text-green-600 transition-colors duration-200">Add Encounter</a>
-                    <a href="about.html" class="text-gray-800 hover:text-green-600 transition-colors duration-200">About</a>
-                    <div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-                        <span class="text-gray-600">👤</span>
+    <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-4">
+                    <!-- Green Icon -->
+                    <div class="text-green-600 size-8">
+                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
+                        </svg>
                     </div>
+                    <!-- AYUSH Heading in Black -->
+                    <h2 class="text-lg font-bold text-black">AYUSH</h2>
+                </div>
+                <!-- Navbar -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="Search-Codes.html">Search Codes</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="Encounter.html">Add Encounter</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+                </nav>
+                <!-- Profile Section -->
+                <div class="flex items-center gap-4">
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("Logo.png");'></div>
                 </div>
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- Header Section -->
     <div class="gradient-bg py-16">
@@ -235,268 +244,261 @@
                 </button>
             </div>
         </div>
-
-        <!-- Statistics Section -->
-        <!-- <div class="mt-16 grid md:grid-cols-4 gap-6">
-            <div class="bg-white rounded-xl p-6 text-center shadow-lg card-hover">
-                <div class="text-3xl font-bold text-green-600 mb-2">1,000+</div>
-                <div class="text-gray-600 font-medium">NAMASTE Codes</div>
-            </div>
-            <div class="bg-white rounded-xl p-6 text-center shadow-lg card-hover">
-                <div class="text-3xl font-bold text-green-600 mb-2">5,000+</div>
-                <div class="text-gray-600 font-medium">ICD-11 Mappings</div>
-            </div>
-            <div class="bg-white rounded-xl p-6 text-center shadow-lg card-hover">
-                <div class="text-3xl font-bold text-green-600 mb-2">99.9%</div>
-                <div class="text-gray-600 font-medium">Accuracy Rate</div>
-            </div>
-            <div class="bg-white rounded-xl p-6 text-center shadow-lg card-hover">
-                <div class="text-3xl font-bold text-green-600 mb-2">24/7</div>
-                <div class="text-gray-600 font-medium">System Uptime</div>
-            </div>
-        </div> -->
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-8">
-                <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="text-2xl">🏥</div>
-                        <h3 class="text-xl font-bold">AYUSH Dual Coding</h3>
-                    </div>
-                    <p class="text-gray-300">Bridging traditional and modern healthcare through innovative coding systems.</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-gray-300">
-                        <li><a href="index.html" class="hover:text-green-400 transition-colors duration-200">Home</a></li>
-                        <li><a href="Search-Codes.html" class="hover:text-green-400 transition-colors duration-200">Search Codes</a></li>
-                        <li><a href="Encounter.html" class="hover:text-green-400 transition-colors duration-200">Patient Encounters</a></li>
-                        <li><a href="about.html" class="hover:text-green-400 transition-colors duration-200">About Project</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-lg font-semibold mb-4">SIH 2025</h4>
-                    <p class="text-gray-300 mb-2">Smart India Hackathon 2025</p>
-                    <p class="text-gray-300 mb-2">Healthcare Innovation</p>
-                    <p class="text-gray-300">AYUSH Ministry Challenge</p>
+    <footer class="bg-gray-800 text-gray-300 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Column 1 -->
+            <div>
+                <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
+                    <i class="fa-solid fa-heart-pulse"></i> AYUSH Dual Coding
+                </h3>
+                <p class="mt-2 text-sm">
+                    Professional medical coding platform for healthcare integration
+                </p>
+                <div class="mt-3 flex space-x-4 text-sm">
+                    <a href="#" class="hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-white">Terms of Service</a>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 AYUSH Dual Coding System. Built for Smart India Hackathon 2025.</p>
+            <!-- Column 2 -->
+            <div>
+                <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
+                    <i class="fa-solid fa-link"></i> Navigation
+                </h3>
+                <ul class="mt-2 space-y-2 text-sm">
+                    <li><a href="index1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-home"></i>Home</a></li>
+                    <li><a href="Search-Codes1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-magnifying-glass"></i>Search Codes</a></li>
+                    <li><a href="Encounter1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-regular fa-file-lines"></i>Add Encounter</a></li>
+                    <li><a href="about1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-circle-info"></i>About</a></li>
+                </ul>
             </div>
+            <!-- Column 3 -->
+            <div>
+                <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
+                    <i class="fa-solid fa-award"></i> SIH 2025
+                </h3>
+                <ul class="mt-2 space-y-2 text-sm">
+                    <li>Smart India Hackathon 2025</li>
+                    <li>Team Elite ES6</li>
+                    <li>Ministry of AYUSH</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Bottom copyright -->
+        <div class="border-t border-gray-600 text-center py-4 text-sm">
+            © 2025 AYUSH Dual Coding System. All rights reserved.
         </div>
     </footer>
 
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9821de8db50a2967',t:'MTc1ODM3NzAzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-<script>
-    // Global variables
-    let selectedCodes = [];
+    <script>
+        // Global variables
+        let selectedCodes = [];
 
-    // Search functionality
-    async function searchCodes() {
-        const query = document.getElementById('searchInput').value.trim();
-        if (!query) {
-            showAlert('Please enter a search term', 'warning');
-            return;
-        }
-        showLoadingState();
-
-        try {
-            // Fetch NAMASTE codes
-            const namasteRes = await fetch(`http://localhost:5000/api/v1/codes/search?type=namaste&query=${encodeURIComponent(query)}`);
-            if (!namasteRes.ok) throw new Error('NAMASTE search failed');
-            const namasteData = await namasteRes.json();
-            displayResults(namasteData, 'namasteResults', 'namaste');
-
-            // Fetch ICD-11 codes
-            const icdRes = await fetch(`http://localhost:5000/api/v1/codes/search?type=icd&query=${encodeURIComponent(query)}`);
-            if (!icdRes.ok) throw new Error('ICD-11 search failed');
-            const icdData = await icdRes.json();
-            displayResults(icdData, 'icd11Results', 'icd11');
-
-        } catch (error) {
-            console.error('Search failed:', error);
-            showAlert('Failed to fetch codes. Please check the server connection.', 'error');
-            hideLoadingState();
-        }
-    }
-
-    function quickSearch(term) {
-        document.getElementById('searchInput').value = term;
-        searchCodes();
-    }
-
-    function showLoadingState() {
-        document.getElementById('namasteResults').innerHTML = `
-            <div class="text-center py-12">
-                <div class="loading-spinner mx-auto mb-4"></div>
-                <p class="text-gray-500">Searching NAMASTE codes...</p>
-            </div>
-        `;
-        document.getElementById('icd11Results').innerHTML = `
-            <div class="text-center py-12">
-                <div class="loading-spinner mx-auto mb-4"></div>
-                <p class="text-gray-500">Searching ICD-11 codes...</p>
-            </div>
-        `;
-    }
-    
-    function hideLoadingState() {
-        // You can add logic here to hide a global loading indicator if you have one
-    }
-
-    function displayResults(results, containerId, type) {
-        const container = document.getElementById(containerId);
-        container.innerHTML = '';
-        
-        if (!Array.isArray(results) || results.length === 0) {
-            container.innerHTML = `
-                <div class="text-center py-12 text-gray-500">
-                    <div class="text-4xl mb-4">🔍</div>
-                    <p class="text-lg">No ${type.toUpperCase()} codes found</p>
-                    <p class="text-sm mt-2">Try different search terms.</p>
-                </div>
-            `;
-            return;
-        }
-
-        results.forEach(code => {
-            const badgeClass = type === 'namaste' ? 'badge-namaste' : 'badge-icd11';
-            const categoryBadgeClass = type === 'namaste' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800';
-
-            const resultHtml = `
-                <div class="result-item border-2 border-gray-200 rounded-xl p-4 transition-all duration-200 hover:border-green-300 hover:bg-green-50">
-                    <div class="flex justify-between items-start">
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-2 mb-2">
-                                <span class="${badgeClass} text-white px-3 py-1 rounded-full text-sm font-semibold">${code.code}</span>
-                                <span class="${categoryBadgeClass} px-2 py-1 rounded-full text-xs font-medium">${code.category || 'N/A'}</span>
-                            </div>
-                            <h4 class="font-semibold text-gray-800 mb-1">${code.display}</h4>
-                            <p class="text-sm text-gray-600">${code.description || ''}</p>
-                        </div>
-                        <button 
-                            onclick="addCode('${type}', '${code.code}', '${code.display}', '${code.category}')"
-                            class="ml-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105"
-                        >
-                            + Add
-                        </button>
-                    </div>
-                </div>
-            `;
-            container.insertAdjacentHTML('beforeend', resultHtml);
-        });
-    }
-
-    function addCode(type, code, display, category) {
-        const existingCode = selectedCodes.find(c => c.code === code && c.type === type);
-        if (existingCode) {
-            showAlert('Code already selected', 'warning');
-            return;
-        }
-        selectedCodes.push({
-            type: type,
-            code: code,
-            display: display,
-            category: category,
-            timestamp: new Date().toISOString()
-        });
-        updateSelectedCodesPanel();
-        showAlert(`${type.toUpperCase()} code ${code} added successfully!`, 'success');
-    }
-
-    function updateSelectedCodesPanel() {
-        const panel = document.getElementById('selectedCodesPanel');
-        const list = document.getElementById('selectedCodesList');
-
-        if (selectedCodes.length > 0) {
-            panel.classList.remove('hidden');
-            panel.classList.add('fade-in');
-            
-            list.innerHTML = selectedCodes.map((code, index) => `
-                <div class="bg-white rounded-xl p-4 border border-green-200 shadow-sm">
-                    <div class="flex justify-between items-start">
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-2 mb-2">
-                                <span class="${code.type === 'namaste' ? 'badge-namaste' : 'badge-icd11'} text-white px-3 py-1 rounded-full text-sm font-semibold">${code.code}</span>
-                                <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">${code.category || ''}</span>
-                                <span class="bg-${code.type === 'namaste' ? 'green' : 'blue'}-100 text-${code.type === 'namaste' ? 'green' : 'blue'}-800 px-2 py-1 rounded-full text-xs font-medium">${code.type.toUpperCase()}</span>
-                            </div>
-                            <h4 class="font-semibold text-gray-800">${code.display}</h4>
-                            <p class="text-xs text-gray-500 mt-1">Added: ${new Date(code.timestamp).toLocaleString()}</p>
-                        </div>
-                        <button 
-                            onclick="removeCode(${index})"
-                            class="ml-4 bg-red-100 hover:bg-red-200 text-red-600 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200"
-                        >
-                            Remove
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        } else {
-            panel.classList.add('hidden');
-        }
-    }
-
-    function removeCode(index) {
-        const removedCode = selectedCodes[index];
-        selectedCodes.splice(index, 1);
-        updateSelectedCodesPanel();
-        showAlert(`Code ${removedCode.code} removed`, 'info');
-    }
-
-    function proceedToEncounter() {
-        if (selectedCodes.length === 0) {
-            showAlert('Please select at least one code before proceeding', 'warning');
-            return;
-        }
-        
-        // This is where you would redirect to the encounter page
-        const selectedCodesString = JSON.stringify(selectedCodes);
-        localStorage.setItem('selectedCodes', selectedCodesString);
-        window.location.href = 'Encounter.html';
-    }
-
-    function showAlert(message, type) {
-        const alertColors = {
-            success: 'bg-green-100 border-green-400 text-green-700',
-            warning: 'bg-yellow-100 border-yellow-400 text-yellow-700',
-            error: 'bg-red-100 border-red-400 text-red-700',
-            info: 'bg-blue-100 border-blue-400 text-blue-700'
-        };
-
-        const alert = document.createElement('div');
-        alert.className = `fixed top-4 right-4 z-50 ${alertColors[type]} border px-4 py-3 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
-        alert.innerHTML = `
-            <div class="flex items-center space-x-2">
-                <span>${message}</span>
-                <button onclick="this.parentElement.parentElement.remove()" class="ml-2 font-bold">&times;</button>
-            </div>
-        `;
-        document.body.appendChild(alert);
-        
-        setTimeout(() => {
-            alert.classList.remove('translate-x-full');
-        }, 100);
-
-        setTimeout(() => {
-            alert.classList.add('translate-x-full');
-            setTimeout(() => alert.remove(), 300);
-        }, 3000);
-    }
-
-    // Initialize the application
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                searchCodes();
+        // Search functionality
+        async function searchCodes() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) {
+                showAlert('Please enter a search term', 'warning');
+                return;
             }
+            showLoadingState();
+
+            try {
+                // Fetch NAMASTE codes
+                const namasteRes = await fetch(`http://localhost:5000/api/v1/codes/search?type=namaste&query=${encodeURIComponent(query)}`);
+                if (!namasteRes.ok) throw new Error('NAMASTE search failed');
+                const namasteData = await namasteRes.json();
+                displayResults(namasteData, 'namasteResults', 'namaste');
+
+                // Fetch ICD-11 codes
+                const icdRes = await fetch(`http://localhost:5000/api/v1/codes/search?type=icd&query=${encodeURIComponent(query)}`);
+                if (!icdRes.ok) throw new Error('ICD-11 search failed');
+                const icdData = await icdRes.json();
+                displayResults(icdData, 'icd11Results', 'icd11');
+
+            } catch (error) {
+                console.error('Search failed:', error);
+                showAlert('Failed to fetch codes. Please check the server connection.', 'error');
+                hideLoadingState();
+            }
+        }
+
+        function quickSearch(term) {
+            document.getElementById('searchInput').value = term;
+            searchCodes();
+        }
+
+        function showLoadingState() {
+            document.getElementById('namasteResults').innerHTML = `
+                <div class="text-center py-12">
+                    <div class="loading-spinner mx-auto mb-4"></div>
+                    <p class="text-gray-500">Searching NAMASTE codes...</p>
+                </div>
+            `;
+            document.getElementById('icd11Results').innerHTML = `
+                <div class="text-center py-12">
+                    <div class="loading-spinner mx-auto mb-4"></div>
+                    <p class="text-gray-500">Searching ICD-11 codes...</p>
+                </div>
+            `;
+        }
+        
+        function hideLoadingState() {
+            // You can add logic here to hide a global loading indicator if you have one
+        }
+
+        function displayResults(results, containerId, type) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            
+            if (!Array.isArray(results) || results.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-500">
+                        <div class="text-4xl mb-4">🔍</div>
+                        <p class="text-lg">No ${type.toUpperCase()} codes found</p>
+                        <p class="text-sm mt-2">Try different search terms.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            results.forEach(code => {
+                const badgeClass = type === 'namaste' ? 'badge-namaste' : 'badge-icd11';
+                const categoryBadgeClass = type === 'namaste' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800';
+
+                const resultHtml = `
+                    <div class="result-item border-2 border-gray-200 rounded-xl p-4 transition-all duration-200 hover:border-green-300 hover:bg-green-50">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="${badgeClass} text-white px-3 py-1 rounded-full text-sm font-semibold">${code.code}</span>
+                                    <span class="${categoryBadgeClass} px-2 py-1 rounded-full text-xs font-medium">${code.category || 'N/A'}</span>
+                                </div>
+                                <h4 class="font-semibold text-gray-800 mb-1">${code.display}</h4>
+                                <p class="text-sm text-gray-600">${code.description || ''}</p>
+                            </div>
+                            <button 
+                                onclick="addCode('${type}', '${code.code}', '${code.display}', '${code.category}')"
+                                class="ml-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105"
+                            >
+                                + Add
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', resultHtml);
+            });
+        }
+
+        function addCode(type, code, display, category) {
+            const existingCode = selectedCodes.find(c => c.code === code && c.type === type);
+            if (existingCode) {
+                showAlert('Code already selected', 'warning');
+                return;
+            }
+            selectedCodes.push({
+                type: type,
+                code: code,
+                display: display,
+                category: category,
+                timestamp: new Date().toISOString()
+            });
+            updateSelectedCodesPanel();
+            showAlert(`${type.toUpperCase()} code ${code} added successfully!`, 'success');
+        }
+
+        function updateSelectedCodesPanel() {
+            const panel = document.getElementById('selectedCodesPanel');
+            const list = document.getElementById('selectedCodesList');
+
+            if (selectedCodes.length > 0) {
+                panel.classList.remove('hidden');
+                panel.classList.add('fade-in');
+                
+                list.innerHTML = selectedCodes.map((code, index) => `
+                    <div class="bg-white rounded-xl p-4 border border-green-200 shadow-sm">
+                        <div class="flex justify-between items-start">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="${code.type === 'namaste' ? 'badge-namaste' : 'badge-icd11'} text-white px-3 py-1 rounded-full text-sm font-semibold">${code.code}</span>
+                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">${code.category || ''}</span>
+                                    <span class="bg-${code.type === 'namaste' ? 'green' : 'blue'}-100 text-${code.type === 'namaste' ? 'green' : 'blue'}-800 px-2 py-1 rounded-full text-xs font-medium">${code.type.toUpperCase()}</span>
+                                </div>
+                                <h4 class="font-semibold text-gray-800">${code.display}</h4>
+                                <p class="text-xs text-gray-500 mt-1">Added: ${new Date(code.timestamp).toLocaleString()}</p>
+                            </div>
+                            <button 
+                                onclick="removeCode(${index})"
+                                class="ml-4 bg-red-100 hover:bg-red-200 text-red-600 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                            >
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                panel.classList.add('hidden');
+            }
+        }
+
+        function removeCode(index) {
+            const removedCode = selectedCodes[index];
+            selectedCodes.splice(index, 1);
+            updateSelectedCodesPanel();
+            showAlert(`Code ${removedCode.code} removed`, 'info');
+        }
+
+        function proceedToEncounter() {
+            if (selectedCodes.length === 0) {
+                showAlert('Please select at least one code before proceeding', 'warning');
+                return;
+            }
+            
+            // This is where you would redirect to the encounter page
+            const selectedCodesString = JSON.stringify(selectedCodes);
+            localStorage.setItem('selectedCodes', selectedCodesString);
+            window.location.href = 'Encounter.html';
+        }
+
+        function showAlert(message, type) {
+            const alertColors = {
+                success: 'bg-green-100 border-green-400 text-green-700',
+                warning: 'bg-yellow-100 border-yellow-400 text-yellow-700',
+                error: 'bg-red-100 border-red-400 text-red-700',
+                info: 'bg-blue-100 border-blue-400 text-blue-700'
+            };
+
+            const alert = document.createElement('div');
+            alert.className = `fixed top-4 right-4 z-50 ${alertColors[type]} border px-4 py-3 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
+            alert.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <span>${message}</span>
+                    <button onclick="this.parentElement.parentElement.remove()" class="ml-2 font-bold">&times;</button>
+                </div>
+            `;
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.classList.remove('translate-x-full');
+            }, 100);
+
+            setTimeout(() => {
+                alert.classList.add('translate-x-full');
+                setTimeout(() => alert.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchCodes();
+                }
+            });
         });
-    });
-</script>
+    </script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9821de8db50a2967',t:'MTc1ODM3NzAzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>

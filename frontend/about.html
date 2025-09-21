@@ -8,7 +8,8 @@
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=block" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
     <script>
         tailwind.config = {
           darkMode: "class",
@@ -16,8 +17,10 @@
             extend: {
               colors: {
                 "primary": "#1dc962",
-                "background-light": "#f6f8f7",
+                "background-light": "#f9fafb",
                 "background-dark": "#112117",
+                "navbar-light": "#ffffff",
+                "navbar-dark": "#1a2a1f",
               },
               fontFamily: {
                 "display": ["Inter", "sans-serif"]
@@ -66,37 +69,52 @@
             height: 4px;
             background: linear-gradient(to right, #1dc962, transparent);
         }
+        /* Glassmorphism effect for navbar with reduced shadow */
+        .navbar-glass {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9); /* Semi-transparent for light mode */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Reduced shadow */
+        }
+        .dark .navbar-glass {
+            background: rgba(26, 42, 31, 0.9); /* Semi-transparent for dark mode */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow for dark mode */
+        }
+        /* Blur effect for content below navbar */
+        .content-blur {
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
     <div class="relative flex min-h-screen w-full flex-col">
-        <header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 shadow-md">
-            <div class="container mx-auto px-6 py-4">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="size-8 text-primary">
+        <!-- Fixed Navbar with Glassmorphism -->
+        <header class="fixed top-0 left-0 right-0 z-50 navbar-glass border-b border-gray-200 dark:border-gray-800">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <div class="flex items-center gap-4">
+                        <div class="text-primary size-8">
                             <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
                             </svg>
                         </div>
-                        <h1 class="text-xl font-bold text-gray-900 dark:text-white">AYUSH</h1>
+                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">AYUSH</h2>
                     </div>
-                    <div class="flex items-center gap-6">
-                        <nav class="hidden md:flex items-center gap-6">
-                            <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Home</a>
-                            <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="Search-Codes.html">Search Codes</a>
-                            <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="Encounter.html">Add Encounter</a>
-                            <a class="text-sm font-medium text-primary dark:text-primary" href="about.html">About</a>
-                        </nav>
-                        <button class="flex items-center justify-center rounded-full size-10 bg-primary/10 hover:bg-primary/20 text-primary transition-colors">
-                            <span class="material-symbols-outlined">help</span>
-                        </button>
-                        <div class="size-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCnhAsI6kSBO9A8DEwNWyXhNSknKMQkk8GiesiXthyI3R7B1vyrEF2y4XQH84AWrCDkhEcIBK2-1iSLXEKlITs3AK7CdG9k4DXTFlMRmXTi22NnrnlJ0b6x9nsDhto4IXdoKMLaZzVYM2jirKR7tmJlUu-mFhDA-yj1es6CdWd5yxm2Pv1VQfqvU2lQmwZPI_tWUQ0spHElpdgEuRIigMoS9CE_98RXiZ6IpIVQCWc6SfSGIkdDq5BlaydYOKZcN3ytL5w43N60ZJs");'></div>
+                    <nav class="hidden md:flex items-center gap-8">
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="Search-Codes.html">Search Codes</a>
+                        <a class="text-sm font-medium hover:text-primary transition-colors" href="Encounter.html">Add Encounter</a>
+                        <a class="text-sm font-medium text-primary" href="about.html">About</a>
+                    </nav>
+                    <div class="flex items-center gap-4">
+                       <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("Logo.png");'></div>
                     </div>
                 </div>
             </div>
         </header>
-        <main class="flex-grow">
+        <!-- Main Content with Padding and Blur -->
+        <main class="flex-grow pt-20 content-blur"> <!-- Added padding-top and blur class -->
             <div class="container mx-auto px-6 py-16">
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-12 animate-fade-in">
@@ -130,71 +148,111 @@
                             <h3 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8 section-title">Meet the Team</h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                                 <div class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300">
-                                    <img alt="Dr. Rohan Sharma" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVKU0_sx8slwC1D-VuOWqwqg8yrAPAhLNh28nEq1m2On2JjJu-GRJuc7n7qbapjXXg8UR11Ev5d2FczkWUJJVbpMxxXqt5ZkRS-QceNd_SKsRp3U3GKSaCKts1Btd9RFV9oowaK94_svT9a4q9I4L2_u3SnD7_nwi1oCwQctZfS2KxAacYQcjrILq9QSPNYgHgPuyRNTM68y5Co14kD1gnwW6vGEHugjwgNEI0e5GqfauHr9lzDt1ytuqEqQnMAukdudbc6bVD_-Y"/>
-                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Dr. Rohan Sharma</h4>
+                                    <img alt="Shreehari Nair" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="one.png"/>
+                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Shreehari Nair</h4>
                                     <p class="text-primary font-medium">Project Lead</p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Leading the integration of traditional and modern healthcare systems with over 10 years of experience.</p>
                                 </div>
                                 <div class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300">
-                                    <img alt="Arjun Verma" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBeLXn0AoF_Zjf_hg4tclS3zuOHBor1SlQ_LWh0TTSCZaeFZgmvcsgPzitbxDgGly9hN6rgzLE5dAcZoquB0FWknIOEZiAH7CW3ORZvvcis26SmfKwCFKlDHT0QA-obbo_s3Zd2c98xxXUAlw8E93Rx_B1AkjJ6ahL6P2N9G29h_72lMta-eERkQe-Pe-9nVJEiDoXLRCRoD1-v3HhpkH31wVDBZUH7qz_1nTl9h6vqVCcQKqp7rN3vsLDsmW6eL9xtncamQoCk1A"/>
-                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Arjun Verma</h4>
+                                    <img alt="Shrirag Nair" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="two.png"/>
+                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Shrirag Nair</h4>
                                     <p class="text-primary font-medium">Backend Developer</p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Expert in Node.js and MongoDB, ensuring scalable and secure backend services.</p>
                                 </div>
                                 <div class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300">
-                                    <img alt="Priya Kapoor" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZGEekh0NEGv_uL5R83n0fhN17Rl-aM8kAiFb9rN8cS88ys2wM6WqnZcNXbYVcpxH3dbeP9C9fW96-Swpsnj_fV3a2FmgPKmo4Qk6tiv4C9781V5CaQmPZF3041Q9j34eTjkkIH9ErvDkCBmdT1V_R-1g616__PG1b3Urp9ch3BQafTbu_1HqCzue7Gi3x6_92tO_YBBUzMeaF5T2CNlUd_WLRNo4r0qMwwf8CPopbOlZ-Zzg5Ad6G0FpTxzStrVb4kiW06Yuq8YI"/>
-                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Priya Kapoor</h4>
+                                    <img alt="Piyush Sharma" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="/data/image/three.png"/>
+                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Piyush Sharma</h4>
                                     <p class="text-primary font-medium">Frontend Developer</p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Crafting intuitive user interfaces with React and Tailwind CSS for seamless user experiences.</p>
                                 </div>
                                 <div class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300">
-                                    <img alt="Dr. Vikram Singh" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB4e-FP_UeZazakPUnViG16UDXqCGZqtGUe8Yg9071uPkckWW4hy4dHXHIqWaaQC53IPh1F0JiBXZmmnV-H6BoCPdEPnzDXkPI-Fl5s_M9UIUx236It7HBrkXmeY_snLR3_ZnS69wq1gUm76AdL68m4Kj68h3d8oFYc7l1bD2hvxjlgWCnhmTiIKXBjCkim9EgVyXNxxprK_6hZWjaPcGBViGSX9A651-SKGspS05uLQzgHy6atV5Uu2ojrFcLWTMxgXtqrKOGSgs"/>
-                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Dr. Vikram Singh</h4>
+                                    <img alt="Ganesh Dubey" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="four.png"/>
+                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Ganesh Dubey</h4>
                                     <p class="text-primary font-medium">AYUSH Expert</p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Providing deep insights into AYUSH practices to ensure accurate coding and integration.</p>
                                 </div>
                                 <div class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300">
-                                    <img alt="Neha Patel" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://via.placeholder.com/150?text=Neha+Patel"/>
-                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Neha Patel</h4>
+                                    <img alt="Rheet Singh" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="five.png"/>
+                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Rheet Singh</h4>
                                     <p class="text-primary font-medium">Database Specialist</p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Optimizing data storage and retrieval for efficient dual coding operations.</p>
                                 </div>
                                 <div class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300">
-                                    <img alt="Sanjay Reddy" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://via.placeholder.com/150?text=Sanjay+Reddy"/>
-                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Sanjay Reddy</h4>
+                                    <img alt="Arjun Marar" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="six.png"/>
+                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Arjun Marar</h4>
                                     <p class="text-primary font-medium">UI/UX Designer</p>
                                     <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Designing user-centric interfaces that make complex healthcare data accessible.</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- New Enhanced Section: Contact Form -->
+                        <!-- Contact Form Section -->
                         <div class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up" style="animation-delay: 1.2s;">
                             <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Get in Touch</h3>
-                            <form class="space-y-4">
+                            <div class="space-y-4">
                                 <input type="text" placeholder="Your Name" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary">
                                 <input type="email" placeholder="Your Email" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary">
                                 <textarea placeholder="Your Message" rows="4" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
-                                <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">Send Message</button>
-                            </form>
+                                <button type="button" class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">Send Message</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
-        <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
-            <div class="container mx-auto px-6 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
-                <p>© 2025 AYUSH Dual Coding System. All Rights Reserved.</p>
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-gray-300 mt-auto content-blur"> <!-- Added blur class to footer -->
+            <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Column 1 -->
+                <div>
+                    <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
+                        <i class="fa-solid fa-heart-pulse"></i> AYUSH Dual Coding
+                    </h3>
+                    <p class="mt-2 text-sm">
+                        Professional medical coding platform for healthcare integration
+                    </p>
+                    <div class="mt-3 flex space-x-4 text-sm">
+                        <a href="#" class="hover:text-white">Privacy Policy</a>
+                        <a href="#" class="hover:text-white">Terms of Service</a>
+                    </div>
+                </div>
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
+                        <i class="fa-solid fa-link"></i> Navigation
+                    </h3>
+                    <ul class="mt-2 space-y-2 text-sm">
+                        <li><a href="index1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-home"></i>Home</a></li>
+                        <li><a href="Search-Codes1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-magnifying-glass"></i>Search Codes</a></li>
+                        <li><a href="Encounter1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-regular fa-file-lines"></i>Add Encounter</a></li>
+                        <li><a href="about1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-circle-info"></i>About</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
+                        <i class="fa-solid fa-award"></i> SIH 2025
+                    </h3>
+                    <ul class="mt-2 space-y-2 text-sm">
+                        <li>Smart India Hackathon 2025</li>
+                        <li>Team Elite ES6</li>
+                        <li>Ministry of AYUSH</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Bottom copyright -->
+            <div class="border-t border-gray-600 text-center py-4 text-sm">
+                © 2025 AYUSH Dual Coding System. All rights reserved.
             </div>
         </footer>
     </div>
     <!-- Dark Mode Toggle Script -->
-    <script>
+    <!-- <script>
         const html = document.documentElement;
         const toggle = document.createElement('button');
         toggle.className = 'fixed bottom-4 right-4 p-2 bg-primary text-white rounded-full shadow-lg';
         toggle.innerHTML = 'Toggle Dark Mode';
         toggle.onclick = () => html.classList.toggle('dark');
         document.body.appendChild(toggle);
-    </script>
+    </script> -->
 </body>
 </html>
