@@ -1,25 +1,27 @@
 const NamasteCode = require("./../models/NamasteCode");
-const ICD11Code = require("./../models/ICD11Code"); 
+const ICD11Code = require("./../models/ICD11Code");
 const loadCSV = require("../utils/csvLoader");
 const { loadNamaste } = require("./../utils/loadNamaste.js");
+const fetchICD11 = require("./../utils/fetchICD11.js");
+const createParameterResource = require("./../utils/createParameterResource.js");
 const Concept = require("./../models/conceptModel.js");
 const ConceptMap = require("./../models/conceptMapModel.js");
 
 exports.searchCodes = async (req, res) => {
   try {
-    const { query, type } = req.query; 
+    const { query, type } = req.query;
     let codes;
 
-    if (type === 'namaste') {
-        codes = await NamasteCode.find({
-            display: { $regex: query, $options: "i" }
-        }).limit(20);
-    } else if (type === 'icd') {
-        codes = await ICD11Code.find({
-            display: { $regex: query, $options: "i" }
-        }).limit(20);
+    if (type === "namaste") {
+      codes = await NamasteCode.find({
+        display: { $regex: query, $options: "i" },
+      }).limit(20);
+    } else if (type === "icd") {
+      codes = await ICD11Code.find({
+        display: { $regex: query, $options: "i" },
+      }).limit(20);
     } else {
-        return res.status(400).json({ error: 'Invalid code type specified.' });
+      return res.status(400).json({ error: "Invalid code type specified." });
     }
     res.json(codes);
   } catch (err) {
@@ -106,6 +108,142 @@ exports.getCodeSystem = async (req, res, next) => {
   }
 };
 
+exports.getConceptMap = async (req, res, next) => {
+  try {
+    const data = await fetchICD11();
+
+    const conceptMap = {
+      resourceType: "ConceptMap",
+      conceptmap_id: "namaste-to-icd11tm2-2025",
+      url: "https://api.sih2025.in/ConceptMap/namaste-to-icd11tm2",
+      version: "2025.09.20",
+      name: "NamasteToICD11TM2ConceptMap",
+      title: "ConceptMap: NAMASTE to ICD-11 TM2 Mapping",
+      status: "active",
+      experimental: false,
+      date: "2025-09-21T07:25:54.394Z",
+      publisher: "SIH-2025 Consortium",
+      contact: [
+        {
+          name: "SIH-2025 Support",
+          telecom: [
+            {
+              system: "email",
+              value: "support@sih2025.in",
+            },
+          ],
+        },
+      ],
+      description:
+        "Maps NAMASTE codes (Indian Traditional Medicine) to ICD-11 TM2 codes for use in FHIR-compliant EHR/EMR systems.",
+      useContext: [
+        {
+          code: {
+            system: "http://terminology.hl7.org/CodeSystem/usage-context-type",
+            code: "focus",
+          },
+          valueCodeableConcept: {
+            coding: [
+              {
+                system: "http://sih2025.in/CodeSystem/",
+                code: "traditional-medicine",
+              },
+            ],
+          },
+        },
+      ],
+      jurisdiction: [
+        {
+          coding: [
+            {
+              system: "urn:iso:std:iso:3166",
+              code: "IN",
+              display: "India",
+            },
+          ],
+        },
+      ],
+      purpose:
+        "To enable standardised interoperability and analytics by mapping NAMASTE codes to ICD-11 TM2 codes in Indian EHRs.",
+      copyright:
+        "© SIH-2025 Consortium, 2025. Licensed for use in Indian EHR/EMR systems.",
+      copyrightLabel: "SIH-2025 2025",
+      approvalDate: "2025-09-21T07:25:54.395Z",
+      lastReviewDate: "2025-09-21T07:25:54.395Z",
+      effectivePeriod: {
+        start: "2025-09-21T07:25:54.395Z",
+        end: "2025-09-21T07:25:54.395Z",
+      },
+      topic: [
+        {
+          coding: [
+            {
+              system: "http://snomed.info/sct",
+              code: "394803006",
+              display: "Traditional medicine",
+            },
+          ],
+        },
+      ],
+      author: [
+        {
+          name: "SIH-2025 Mapping Team",
+        },
+      ],
+      editor: [
+        {
+          name: "SIH-2025 Standards Editor",
+        },
+      ],
+      reviewer: [
+        {
+          name: "Indian EHR Standards Reviewer",
+        },
+      ],
+      endorser: [
+        {
+          name: "National Resource Centre for EHR Standards",
+        },
+      ],
+      relatedArtifact: [
+        {
+          type: "documentation",
+          display: "NAMASTE Terminology Specification",
+          url: "https://nrcehrs.org/namaste",
+        },
+        {
+          type: "documentation",
+          display: "ICD-11 TM2 Specification",
+          url: "https://icd.who.int/icdapi",
+        },
+      ],
+      property: [
+        {
+          code: "mapping-quality",
+          uri: "https://api.sih2025.in/ConceptMap/property/mapping-quality",
+          description:
+            "Quality of the code mapping (manual, automated, expert-reviewed)",
+          type: "code",
+          system: "https://api.sih2025.in/CodeSystem/mapping-quality",
+        },
+      ],
+      additionalAttribute: [
+        {
+          code: "clinical-context",
+          uri: "https://api.sih2025.in/ConceptMap/attribute/clinical-context",
+          description:
+            "Clinical context required for mapping (e.g., age, gender)",
+          type: "string",
+        },
+      ],
+      sourceScopeUri: "https://api.sih2025.in/ValueSet/namaste",
+      targetScopeUri: "https://id.who.int/icd/release/11/2023-01/mms",
+    };
+    res.status(200).json({ status: "success", conceptMap });
+  } catch (err) {
+    res.status(500).json({ status: "fail", message: "Server Error" });
+  }
+};
 exports.updateMappings = async (req, res, next) => {
   try {
     const namasteMap = await loadNamaste("data/mapping.csv");
@@ -143,6 +281,104 @@ exports.createConceptMap = async (req, res, next) => {
       status: "success",
       data,
       message: "FHIR Concept Map was created successfully",
+    });
+  }
+};
+
+exports.translate = async (req, res, next) => {
+  try {
+    const query = req.method === "GET" ? req.query : req.body;
+
+    if (!query?.system || !query?.target)
+      return res.status(500).json({
+        status: "error",
+        message: "Please specify a valid source and target CodeSystem",
+      });
+    if (!query?.code)
+      return res.status(404).json({
+        status: "fail",
+        message: "Please enter a valid Namaste code",
+      });
+
+    let map = await Concept.findOne(
+      { code: query.code },
+      "code ICD11Code display"
+    );
+    map = {
+      code: map.code,
+      ICD11Code: map.ICD11Code,
+      namasteName: map.display,
+    };
+
+    if (!Object.keys(map).length)
+      return res
+        .status(404)
+        .json({ status: "success", message: "No mappings were found" });
+
+    let data = await fetchICD11(map);
+    console.log(data);
+
+    data = data.parameter.find((d) => d?.name === "display");
+    console.log(data);
+    map.ICD11Name = data.valueString;
+    console.log();
+    res.status(200).json({
+      status: "success",
+      map,
+      message: "Translated TM2 to ICD 11 CODE",
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+};
+
+exports.fhirTranslate = async (req, res, next) => {
+  try {
+    const query = req.method === "GET" ? req.query : req.body;
+
+    if (!query?.system || !query?.target)
+      return res.status(500).json({
+        status: "error",
+        message: "Please specify a valid source and target CodeSystem",
+      });
+    if (!query?.code)
+      return res.status(404).json({
+        status: "fail",
+        message: "Please enter a valid Namaste code",
+      });
+
+    let map = await Concept.findOne(
+      { code: query.code },
+      "code ICD11Code display"
+    );
+    map = {
+      code: map.code,
+      ICD11Code: map.ICD11Code,
+      namasteName: map.display,
+    };
+
+    if (!Object.keys(map).length)
+      return res
+        .status(404)
+        .json({ status: "success", message: "No mappings were found" });
+
+    let data = await fetchICD11(map);
+    data = data.parameter.find((d) => d?.name === "display");
+    map.ICD11Name = data.valueString;
+    console.log(map);
+
+    data = createParameterResource(map);
+    res.status(200).json({
+      status: "success",
+      data,
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
     });
   }
 };

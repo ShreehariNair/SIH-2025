@@ -1,200 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>AYUSH Dual Coding System - About Us</title>
-    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com" rel="preconnect"/>
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
     <script>
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              colors: {
-                "primary": "#1dc962",
-                "background-light": "#f6f8f7",
-                "background-dark": "#112117",
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1dc962",
+              "background-light": "#f6f8f7",
+              "background-dark": "#112117",
+            },
+            fontFamily: {
+              display: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            animation: {
+              "fade-in": "fadeIn 1s ease-out",
+              "slide-up": "slideUp 0.5s ease-out",
+            },
+            keyframes: {
+              fadeIn: {
+                "0%": { opacity: "0" },
+                "100%": { opacity: "1" },
               },
-              fontFamily: {
-                "display": ["Inter", "sans-serif"]
-              },
-              borderRadius: {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
-                "full": "9999px"
-              },
-              animation: {
-                'fade-in': 'fadeIn 1s ease-out',
-                'slide-up': 'slideUp 0.5s ease-out',
-              },
-              keyframes: {
-                fadeIn: {
-                  '0%': { opacity: '0' },
-                  '100%': { opacity: '1' },
-                },
-                slideUp: {
-                  '0%': { transform: 'translateY(20px)', opacity: '0' },
-                  '100%': { transform: 'translateY(0)', opacity: '1' },
-                },
+              slideUp: {
+                "0%": { transform: "translateY(20px)", opacity: "0" },
+                "100%": { transform: "translateY(0)", opacity: "1" },
               },
             },
           },
-        }
-      </script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
     <style>
-        /* Additional custom styles for enhancement */
-        .team-card:hover {
-            transform: scale(1.05);
-            transition: transform 0.3s ease;
-        }
-        .section-title {
-            position: relative;
-            overflow: hidden;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, #1dc962, transparent);
-        }
+      /* Additional custom styles for enhancement */
+      .team-card:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease;
+      }
+      .section-title {
+        position: relative;
+        overflow: hidden;
+      }
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(to right, #1dc962, transparent);
+      }
     </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200"
+  >
     <div class="relative flex min-h-screen w-full flex-col">
-        <header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 shadow-md">
-            <div class="container mx-auto px-6 py-4">
-                <div class="flex items-center justify-between">
-                    <div class="flex items-center gap-3">
-                        <div class="size-8 text-primary">
-                            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
-                            </svg>
-                        </div>
-                        <h1 class="text-xl font-bold text-gray-900 dark:text-white">AYUSH</h1>
-                    </div>
-                    <div class="flex items-center gap-6">
-                        <nav class="hidden md:flex items-center gap-6">
-                            <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Home</a>
-                            <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="Search-Codes.html">Search Codes</a>
-                            <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="Encounter.html">Add Encounter</a>
-                            <a class="text-sm font-medium text-primary dark:text-primary" href="about.html">About</a>
-                        </nav>
-                        <button class="flex items-center justify-center rounded-full size-10 bg-primary/10 hover:bg-primary/20 text-primary transition-colors">
-                            <span class="material-symbols-outlined">help</span>
-                        </button>
-                        <div class="size-10 rounded-full bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCnhAsI6kSBO9A8DEwNWyXhNSknKMQkk8GiesiXthyI3R7B1vyrEF2y4XQH84AWrCDkhEcIBK2-1iSLXEKlITs3AK7CdG9k4DXTFlMRmXTi22NnrnlJ0b6x9nsDhto4IXdoKMLaZzVYM2jirKR7tmJlUu-mFhDA-yj1es6CdWd5yxm2Pv1VQfqvU2lQmwZPI_tWUQ0spHElpdgEuRIigMoS9CE_98RXiZ6IpIVQCWc6SfSGIkdDq5BlaydYOKZcN3ytL5w43N60ZJs");'></div>
-                    </div>
+      <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 shadow-md"
+      >
+        <div class="container mx-auto px-6 py-4">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div class="size-8 text-primary">
+                <svg
+                  fill="none"
+                  viewBox="0 0 48 48"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </div>
+              <h1 class="text-xl font-bold text-gray-900 dark:text-white">
+                AYUSH
+              </h1>
+            </div>
+            <div class="flex items-center gap-6">
+              <nav class="hidden md:flex items-center gap-6">
+                <a
+                  class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                  href="index.html"
+                  >Home</a
+                >
+                <a
+                  class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                  href="Search-Codes.html"
+                  >Search Codes</a
+                >
+                <a
+                  class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
+                  href="Encounter.html"
+                  >Add Encounter</a
+                >
+                <a
+                  class="text-sm font-medium text-primary dark:text-primary"
+                  href="about.html"
+                  >About</a
+                >
+              </nav>
+              <button
+                class="flex items-center justify-center rounded-full size-10 bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
+              >
+                <span class="material-symbols-outlined">help</span>
+              </button>
+              <div
+                class="size-10 rounded-full bg-cover bg-center"
+                style="
+                  background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCnhAsI6kSBO9A8DEwNWyXhNSknKMQkk8GiesiXthyI3R7B1vyrEF2y4XQH84AWrCDkhEcIBK2-1iSLXEKlITs3AK7CdG9k4DXTFlMRmXTi22NnrnlJ0b6x9nsDhto4IXdoKMLaZzVYM2jirKR7tmJlUu-mFhDA-yj1es6CdWd5yxm2Pv1VQfqvU2lQmwZPI_tWUQ0spHElpdgEuRIigMoS9CE_98RXiZ6IpIVQCWc6SfSGIkdDq5BlaydYOKZcN3ytL5w43N60ZJs');
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <main class="flex-grow">
+        <div class="container mx-auto px-6 py-16">
+          <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12 animate-fade-in">
+              <h2
+                class="text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white section-title"
+              >
+                About the Initiative
+              </h2>
+              <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
+                Bridging Traditional Wisdom with Modern Healthcare
+              </p>
+            </div>
+            <div class="space-y-12">
+              <div
+                class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up"
+              >
+                <h3
+                  class="text-2xl font-bold text-gray-900 dark:text-white mb-4"
+                >
+                  Project Overview
+                </h3>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  The AYUSH Dual Coding System is a pioneering initiative
+                  designed to bridge the gap between traditional Indian medicine
+                  (AYUSH) and modern healthcare classification systems. This
+                  system facilitates interoperability between the National AYUSH
+                  Morbidity and Standardized Terminology Electronic (NAMASTE)
+                  and the International Classification of Diseases 11th Revision
+                  (ICD-11), enabling seamless data exchange and analysis across
+                  diverse healthcare platforms.
+                </p>
+              </div>
+              <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div
+                  class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up"
+                  style="animation-delay: 0.2s"
+                >
+                  <h3
+                    class="text-2xl font-bold text-gray-900 dark:text-white mb-4"
+                  >
+                    Importance of Dual Coding
+                  </h3>
+                  <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    Dual coding with NAMASTE and ICD-11 is crucial for a
+                    comprehensive understanding of patient health by integrating
+                    traditional and modern medical perspectives. This enhances
+                    diagnostic accuracy, supports global data standardization,
+                    and promotes collaboration across medical systems.
+                  </p>
                 </div>
-            </div>
-        </header>
-        <main class="flex-grow">
-            <div class="container mx-auto px-6 py-16">
-                <div class="max-w-4xl mx-auto">
-                    <div class="text-center mb-12 animate-fade-in">
-                        <h2 class="text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white section-title">About the Initiative</h2>
-                        <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">Bridging Traditional Wisdom with Modern Healthcare</p>
-                    </div>
-                    <div class="space-y-12">
-                        <div class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Project Overview</h3>
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">The AYUSH Dual Coding System is a pioneering initiative designed to bridge the gap between traditional Indian medicine (AYUSH) and modern healthcare classification systems. This system facilitates interoperability between the National AYUSH Morbidity and Standardized Terminology Electronic (NAMASTE) and the International Classification of Diseases 11th Revision (ICD-11), enabling seamless data exchange and analysis across diverse healthcare platforms.</p>
-                        </div>
-                        <div class="grid md:grid-cols-2 gap-8 items-center">
-                            <div class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up" style="animation-delay: 0.2s;">
-                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Importance of Dual Coding</h3>
-                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">Dual coding with NAMASTE and ICD-11 is crucial for a comprehensive understanding of patient health by integrating traditional and modern medical perspectives. This enhances diagnostic accuracy, supports global data standardization, and promotes collaboration across medical systems.</p>
-                            </div>
-                            <div class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up" style="animation-delay: 0.4s;">
-                                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Role of AYUSH</h3>
-                                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">By incorporating AYUSH terminologies (Ayurveda, Yoga, Naturopathy, Unani, Siddha, Homeopathy) into a globally recognized coding system, we preserve its rich heritage and expand its impact and accessibility in mainstream healthcare practices.</p>
-                            </div>
-                        </div>
-                        <div class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up" style="animation-delay: 0.6s;">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Technology Stack</h3>
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">Our system is built on a robust MERN stack (MongoDB, Express.js, React.js, Node.js). MongoDB serves as our primary database for dual-coded data. The frontend, built with React, offers a user-friendly interface, while APIs ensure smooth data communication between the frontend and backend. We've enhanced performance with optimized queries and added real-time features using WebSockets.</p>
-                        </div>
-                        <div class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up" style="animation-delay: 0.8s;">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">SIH Problem Statement</h3>
-                            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">This project addresses the critical need for a standardized system to integrate traditional Indian medicine (AYUSH) with modern healthcare. The lack of interoperability between AYUSH terminologies and international classification systems like ICD-11 hinders data exchange, research, and comprehensive patient care. Our solution aims to bridge this gap by creating a dual coding system that accurately represents AYUSH concepts within a globally recognized framework.</p>
-                        </div>
-                        <div class="animate-fade-in" style="animation-delay: 1s;">
-                            <h3 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8 section-title">Meet the Team</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                                <div class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300">
-                                    <img alt="Dr. Rohan Sharma" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVKU0_sx8slwC1D-VuOWqwqg8yrAPAhLNh28nEq1m2On2JjJu-GRJuc7n7qbapjXXg8UR11Ev5d2FczkWUJJVbpMxxXqt5ZkRS-QceNd_SKsRp3U3GKSaCKts1Btd9RFV9oowaK94_svT9a4q9I4L2_u3SnD7_nwi1oCwQctZfS2KxAacYQcjrILq9QSPNYgHgPuyRNTM68y5Co14kD1gnwW6vGEHugjwgNEI0e5GqfauHr9lzDt1ytuqEqQnMAukdudbc6bVD_-Y"/>
-                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Dr. Rohan Sharma</h4>
-                                    <p class="text-primary font-medium">Project Lead</p>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Leading the integration of traditional and modern healthcare systems with over 10 years of experience.</p>
-                                </div>
-                                <div class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300">
-                                    <img alt="Arjun Verma" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBeLXn0AoF_Zjf_hg4tclS3zuOHBor1SlQ_LWh0TTSCZaeFZgmvcsgPzitbxDgGly9hN6rgzLE5dAcZoquB0FWknIOEZiAH7CW3ORZvvcis26SmfKwCFKlDHT0QA-obbo_s3Zd2c98xxXUAlw8E93Rx_B1AkjJ6ahL6P2N9G29h_72lMta-eERkQe-Pe-9nVJEiDoXLRCRoD1-v3HhpkH31wVDBZUH7qz_1nTl9h6vqVCcQKqp7rN3vsLDsmW6eL9xtncamQoCk1A"/>
-                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Arjun Verma</h4>
-                                    <p class="text-primary font-medium">Backend Developer</p>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Expert in Node.js and MongoDB, ensuring scalable and secure backend services.</p>
-                                </div>
-                                <div class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300">
-                                    <img alt="Priya Kapoor" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZGEekh0NEGv_uL5R83n0fhN17Rl-aM8kAiFb9rN8cS88ys2wM6WqnZcNXbYVcpxH3dbeP9C9fW96-Swpsnj_fV3a2FmgPKmo4Qk6tiv4C9781V5CaQmPZF3041Q9j34eTjkkIH9ErvDkCBmdT1V_R-1g616__PG1b3Urp9ch3BQafTbu_1HqCzue7Gi3x6_92tO_YBBUzMeaF5T2CNlUd_WLRNo4r0qMwwf8CPopbOlZ-Zzg5Ad6G0FpTxzStrVb4kiW06Yuq8YI"/>
-                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Priya Kapoor</h4>
-                                    <p class="text-primary font-medium">Frontend Developer</p>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Crafting intuitive user interfaces with React and Tailwind CSS for seamless user experiences.</p>
-                                </div>
-                                <div class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300">
-                                    <img alt="Dr. Vikram Singh" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB4e-FP_UeZazakPUnViG16UDXqCGZqtGUe8Yg9071uPkckWW4hy4dHXHIqWaaQC53IPh1F0JiBXZmmnV-H6BoCPdEPnzDXkPI-Fl5s_M9UIUx236It7HBrkXmeY_snLR3_ZnS69wq1gUm76AdL68m4Kj68h3d8oFYc7l1bD2hvxjlgWCnhmTiIKXBjCkim9EgVyXNxxprK_6hZWjaPcGBViGSX9A651-SKGspS05uLQzgHy6atV5Uu2ojrFcLWTMxgXtqrKOGSgs"/>
-                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Dr. Vikram Singh</h4>
-                                    <p class="text-primary font-medium">AYUSH Expert</p>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Providing deep insights into AYUSH practices to ensure accurate coding and integration.</p>
-                                </div>
-                                <div class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300">
-                                    <img alt="Neha Patel" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://via.placeholder.com/150?text=Neha+Patel"/>
-                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Neha Patel</h4>
-                                    <p class="text-primary font-medium">Database Specialist</p>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Optimizing data storage and retrieval for efficient dual coding operations.</p>
-                                </div>
-                                <div class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300">
-                                    <img alt="Sanjay Reddy" class="w-24 h-24 mx-auto rounded-full mb-4 object-cover" src="https://via.placeholder.com/150?text=Sanjay+Reddy"/>
-                                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">Sanjay Reddy</h4>
-                                    <p class="text-primary font-medium">UI/UX Designer</p>
-                                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Designing user-centric interfaces that make complex healthcare data accessible.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- New Enhanced Section: Contact Form -->
-                        <div class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up" style="animation-delay: 1.2s;">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Get in Touch</h3>
-                            <form class="space-y-4">
-                                <input type="text" placeholder="Your Name" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary">
-                                <input type="email" placeholder="Your Email" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary">
-                                <textarea placeholder="Your Message" rows="4" class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
-                                <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors">Send Message</button>
-                            </form>
-                        </div>
-                    </div>
+                <div
+                  class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up"
+                  style="animation-delay: 0.4s"
+                >
+                  <h3
+                    class="text-2xl font-bold text-gray-900 dark:text-white mb-4"
+                  >
+                    Role of AYUSH
+                  </h3>
+                  <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    By incorporating AYUSH terminologies (Ayurveda, Yoga,
+                    Naturopathy, Unani, Siddha, Homeopathy) into a globally
+                    recognized coding system, we preserve its rich heritage and
+                    expand its impact and accessibility in mainstream healthcare
+                    practices.
+                  </p>
                 </div>
+              </div>
+              <div
+                class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up"
+                style="animation-delay: 0.6s"
+              >
+                <h3
+                  class="text-2xl font-bold text-gray-900 dark:text-white mb-4"
+                >
+                  Technology Stack
+                </h3>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  Our system is built on a robust MERN stack (MongoDB,
+                  Express.js, React.js, Node.js). MongoDB serves as our primary
+                  database for dual-coded data. The frontend, built with React,
+                  offers a user-friendly interface, while APIs ensure smooth
+                  data communication between the frontend and backend. We've
+                  enhanced performance with optimized queries and added
+                  real-time features using WebSockets.
+                </p>
+              </div>
+              <div
+                class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up"
+                style="animation-delay: 0.8s"
+              >
+                <h3
+                  class="text-2xl font-bold text-gray-900 dark:text-white mb-4"
+                >
+                  SIH Problem Statement
+                </h3>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  This project addresses the critical need for a standardized
+                  system to integrate traditional Indian medicine (AYUSH) with
+                  modern healthcare. The lack of interoperability between AYUSH
+                  terminologies and international classification systems like
+                  ICD-11 hinders data exchange, research, and comprehensive
+                  patient care. Our solution aims to bridge this gap by creating
+                  a dual coding system that accurately represents AYUSH concepts
+                  within a globally recognized framework.
+                </p>
+              </div>
+              <div class="animate-fade-in" style="animation-delay: 1s">
+                <h3
+                  class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-8 section-title"
+                >
+                  Meet the Team
+                </h3>
+                <div
+                  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                  <div
+                    class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300"
+                  >
+                    <img
+                      alt="Dr. Rohan Sharma"
+                      class="w-24 h-24 mx-auto rounded-full mb-4 object-cover"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVKU0_sx8slwC1D-VuOWqwqg8yrAPAhLNh28nEq1m2On2JjJu-GRJuc7n7qbapjXXg8UR11Ev5d2FczkWUJJVbpMxxXqt5ZkRS-QceNd_SKsRp3U3GKSaCKts1Btd9RFV9oowaK94_svT9a4q9I4L2_u3SnD7_nwi1oCwQctZfS2KxAacYQcjrILq9QSPNYgHgPuyRNTM68y5Co14kD1gnwW6vGEHugjwgNEI0e5GqfauHr9lzDt1ytuqEqQnMAukdudbc6bVD_-Y"
+                    />
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">
+                      Dr. Rohan Sharma
+                    </h4>
+                    <p class="text-primary font-medium">Project Lead</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                      Leading the integration of traditional and modern
+                      healthcare systems with over 10 years of experience.
+                    </p>
+                  </div>
+                  <div
+                    class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300"
+                  >
+                    <img
+                      alt="Arjun Verma"
+                      class="w-24 h-24 mx-auto rounded-full mb-4 object-cover"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBeLXn0AoF_Zjf_hg4tclS3zuOHBor1SlQ_LWh0TTSCZaeFZgmvcsgPzitbxDgGly9hN6rgzLE5dAcZoquB0FWknIOEZiAH7CW3ORZvvcis26SmfKwCFKlDHT0QA-obbo_s3Zd2c98xxXUAlw8E93Rx_B1AkjJ6ahL6P2N9G29h_72lMta-eERkQe-Pe-9nVJEiDoXLRCRoD1-v3HhpkH31wVDBZUH7qz_1nTl9h6vqVCcQKqp7rN3vsLDsmW6eL9xtncamQoCk1A"
+                    />
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">
+                      Arjun Verma
+                    </h4>
+                    <p class="text-primary font-medium">Backend Developer</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                      Expert in Node.js and MongoDB, ensuring scalable and
+                      secure backend services.
+                    </p>
+                  </div>
+                  <div
+                    class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300"
+                  >
+                    <img
+                      alt="Priya Kapoor"
+                      class="w-24 h-24 mx-auto rounded-full mb-4 object-cover"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZGEekh0NEGv_uL5R83n0fhN17Rl-aM8kAiFb9rN8cS88ys2wM6WqnZcNXbYVcpxH3dbeP9C9fW96-Swpsnj_fV3a2FmgPKmo4Qk6tiv4C9781V5CaQmPZF3041Q9j34eTjkkIH9ErvDkCBmdT1V_R-1g616__PG1b3Urp9ch3BQafTbu_1HqCzue7Gi3x6_92tO_YBBUzMeaF5T2CNlUd_WLRNo4r0qMwwf8CPopbOlZ-Zzg5Ad6G0FpTxzStrVb4kiW06Yuq8YI"
+                    />
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">
+                      Priya Kapoor
+                    </h4>
+                    <p class="text-primary font-medium">Frontend Developer</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                      Crafting intuitive user interfaces with React and Tailwind
+                      CSS for seamless user experiences.
+                    </p>
+                  </div>
+                  <div
+                    class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300"
+                  >
+                    <img
+                      alt="Dr. Vikram Singh"
+                      class="w-24 h-24 mx-auto rounded-full mb-4 object-cover"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB4e-FP_UeZazakPUnViG16UDXqCGZqtGUe8Yg9071uPkckWW4hy4dHXHIqWaaQC53IPh1F0JiBXZmmnV-H6BoCPdEPnzDXkPI-Fl5s_M9UIUx236It7HBrkXmeY_snLR3_ZnS69wq1gUm76AdL68m4Kj68h3d8oFYc7l1bD2hvxjlgWCnhmTiIKXBjCkim9EgVyXNxxprK_6hZWjaPcGBViGSX9A651-SKGspS05uLQzgHy6atV5Uu2ojrFcLWTMxgXtqrKOGSgs"
+                    />
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">
+                      Dr. Vikram Singh
+                    </h4>
+                    <p class="text-primary font-medium">AYUSH Expert</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                      Providing deep insights into AYUSH practices to ensure
+                      accurate coding and integration.
+                    </p>
+                  </div>
+                  <div
+                    class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300"
+                  >
+                    <img
+                      alt="Neha Patel"
+                      class="w-24 h-24 mx-auto rounded-full mb-4 object-cover"
+                      src="https://via.placeholder.com/150?text=Neha+Patel"
+                    />
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">
+                      Neha Patel
+                    </h4>
+                    <p class="text-primary font-medium">Database Specialist</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                      Optimizing data storage and retrieval for efficient dual
+                      coding operations.
+                    </p>
+                  </div>
+                  <div
+                    class="text-center p-6 rounded-xl bg-white/50 dark:bg-black/20 team-card transition-all duration-300"
+                  >
+                    <img
+                      alt="Sanjay Reddy"
+                      class="w-24 h-24 mx-auto rounded-full mb-4 object-cover"
+                      src="https://via.placeholder.com/150?text=Sanjay+Reddy"
+                    />
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">
+                      Sanjay Reddy
+                    </h4>
+                    <p class="text-primary font-medium">UI/UX Designer</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                      Designing user-centric interfaces that make complex
+                      healthcare data accessible.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- New Enhanced Section: Contact Form -->
+              <div
+                class="p-8 rounded-xl bg-white/50 dark:bg-black/20 animate-slide-up"
+                style="animation-delay: 1.2s"
+              >
+                <h3
+                  class="text-2xl font-bold text-gray-900 dark:text-white mb-4"
+                >
+                  Get in Touch
+                </h3>
+                <form class="space-y-4">
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                  <textarea
+                    placeholder="Your Message"
+                    rows="4"
+                    class="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-transparent focus:outline-none focus:ring-2 focus:ring-primary"
+                  ></textarea>
+                  <button
+                    type="submit"
+                    class="w-full bg-primary text-white py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
+                  >
+                    Send Message
+                  </button>
+                </form>
+              </div>
             </div>
-        </main>
-        <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800">
-            <div class="container mx-auto px-6 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
-                <p>© 2025 AYUSH Dual Coding System. All Rights Reserved.</p>
-            </div>
-        </footer>
+          </div>
+        </div>
+      </main>
+      <footer
+        class="bg-background-light dark:bg-background-dark border-t border-gray-200 dark:border-gray-800"
+      >
+        <div
+          class="container mx-auto px-6 py-6 text-center text-sm text-gray-500 dark:text-gray-400"
+        >
+          <p>© 2025 AYUSH Dual Coding System. All Rights Reserved.</p>
+        </div>
+      </footer>
     </div>
     <!-- Dark Mode Toggle Script -->
     <script>
-        const html = document.documentElement;
-        const toggle = document.createElement('button');
-        toggle.className = 'fixed bottom-4 right-4 p-2 bg-primary text-white rounded-full shadow-lg';
-        toggle.innerHTML = 'Toggle Dark Mode';
-        toggle.onclick = () => html.classList.toggle('dark');
-        document.body.appendChild(toggle);
+      const html = document.documentElement;
+      const toggle = document.createElement("button");
+      toggle.className =
+        "fixed bottom-4 right-4 p-2 bg-primary text-white rounded-full shadow-lg";
+      toggle.innerHTML = "Toggle Dark Mode";
+      toggle.onclick = () => html.classList.toggle("dark");
+      document.body.appendChild(toggle);
     </script>
-</body>
+  </body>
 </html>

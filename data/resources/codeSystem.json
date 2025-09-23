@@ -1,10 +1,14 @@
 {
   "resourceType": "CodeSystem",
-  "id": "NAMASTE",
-  "url": "https://ayush.gov.in/",
-  "version": "2025-09",
-  "name": "NAMASTE",
-  "status": "active",
+  "id": "namaste-minimal",
+  "url": "http://ayush.gov.in/fhir/CodeSystem/namaste",
+  "version": "0.1.0",
+  "name": "NAMASTE_Coding_System",
+  "title": "NAMASTE Coding System",
+  "status": "draft",
   "experimental": true,
+  "date": "2025-09-21T11:09:07Z",
+  "description": "National AYUSH Morbidity and Standardized Terminologies for Electronic (NAMASTE) health records. This resource defines the existence and properties of the NAMASTE code system. The complete set of concepts is not included in this resource.",
+  "caseSensitive": true,
   "content": "not-present"
 }

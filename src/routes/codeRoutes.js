@@ -5,11 +5,13 @@ const {
   uploadCSV,
   updateMappings,
   createConceptMap,
-} = require("../controllers/codeController");
+  translate,
+} = require("../controllers/codeController.js");
 
 router.get("/search", searchCodes);
-router.get("/mapping", updateMappings);
+router.get("/map", updateMappings);
 router.post("/upload", uploadCSV);
 router.post("/createConceptMap", createConceptMap);
+router.get("/translate", translate).post("/translate", translate);
 
 module.exports = router;

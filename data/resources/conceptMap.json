@@ -1,0 +1,141 @@
+{
+  "resourceType": "ConceptMap",
+  "conceptmap_id": "namaste-to-icd11tm2-2025",
+  "url": "https://api.sih2025.in/ConceptMap/namaste-to-icd11tm2",
+  "version": "2025.09.20",
+  "name": "NamasteToICD11TM2ConceptMap",
+  "title": "ConceptMap: NAMASTE to ICD-11 TM2 Mapping",
+  "status": "active",
+  "experimental": false,
+  "date": "2025-09-21T07:25:54.394Z",
+  "publisher": "SIH-2025 Consortium",
+  "contact": [
+    {
+      "name": "SIH-2025 Support",
+      "telecom": [
+        {
+          "system": "email",
+          "value": "support@sih2025.in"
+        }
+      ]
+    }
+  ],
+  "description": "Maps NAMASTE codes (Indian Traditional Medicine) to ICD-11 TM2 codes for use in FHIR-compliant EHR/EMR systems.",
+  "useContext": [
+    {
+      "code": {
+        "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+        "code": "focus"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://sih2025.in/CodeSystem/domain",
+            "code": "traditional-medicine"
+          }
+        ]
+      }
+    }
+  ],
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "IN",
+          "display": "India"
+        }
+      ]
+    }
+  ],
+  "purpose": "To enable standardised interoperability and analytics by mapping NAMASTE codes to ICD-11 TM2 codes in Indian EHRs.",
+  "copyright": "© SIH-2025 Consortium, 2025. Licensed for use in Indian EHR/EMR systems.",
+  "copyrightLabel": "SIH-2025 2025",
+  "approvalDate": "2025-09-21T07:25:54.395Z",
+  "lastReviewDate": "2025-09-21T07:25:54.395Z",
+  "effectivePeriod": {
+    "start": "2025-09-21T07:25:54.395Z",
+    "end": "2025-09-21T07:25:54.395Z"
+  },
+  "topic": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "394803006",
+          "display": "Traditional medicine"
+        }
+      ]
+    }
+  ],
+  "author": [
+    {
+      "name": "SIH-2025 Mapping Team"
+    }
+  ],
+  "editor": [
+    {
+      "name": "SIH-2025 Standards Editor"
+    }
+  ],
+  "reviewer": [
+    {
+      "name": "Indian EHR Standards Reviewer"
+    }
+  ],
+  "endorser": [
+    {
+      "name": "National Resource Centre for EHR Standards"
+    }
+  ],
+  "relatedArtifact": [
+    {
+      "type": "documentation",
+      "display": "NAMASTE Terminology Specification",
+      "url": "https://nrcehrs.org/namaste"
+    },
+    {
+      "type": "documentation",
+      "display": "ICD-11 TM2 Specification",
+      "url": "https://icd.who.int/icdapi"
+    }
+  ],
+  "property": [
+    {
+      "code": "mapping-quality",
+      "uri": "https://api.sih2025.in/ConceptMap/property/mapping-quality",
+      "description": "Quality of the code mapping (manual, automated, expert-reviewed)",
+      "type": "code",
+      "system": "https://api.sih2025.in/CodeSystem/mapping-quality"
+    }
+  ],
+  "additionalAttribute": [
+    {
+      "code": "clinical-context",
+      "uri": "https://api.sih2025.in/ConceptMap/attribute/clinical-context",
+      "description": "Clinical context required for mapping (e.g., age, gender)",
+      "type": "string"
+    }
+  ],
+  "sourceScopeUri": "https://api.sih2025.in/ValueSet/namaste",
+  "targetScopeUri": "https://id.who.int/icd/release/11/2023-01/mms",
+  "group": [
+    {
+      "source": "https://api.sih2025.in/CodeSystem/namaste",
+      "target": "http://id.who.int/icd/entity/1639997017",
+      "element": [
+        {
+          "code": "AYU1234",
+          "display": "Wind Pattern",
+          "target": [
+            {
+              "code": "TM2-001",
+              "display": "ICD-11 Wind Pattern",
+              "relationship": "equivalent"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
