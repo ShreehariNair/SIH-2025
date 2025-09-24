@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AYUSH Dual Coding - Search Medical Codes</title>
+    <title>AYUSH Dual Coding - Translate Medical Codes</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -87,28 +87,23 @@
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
-    <!-- Navigation -->
     <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-4">
-                    <!-- Green Icon -->
                     <div class="text-green-600 size-8">
                         <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                             <path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
                         </svg>
                     </div>
-                    <!-- AYUSH Heading in Black -->
                     <h2 class="text-lg font-bold text-black">AYUSH</h2>
                 </div>
-                <!-- Navbar -->
                 <nav class="hidden md:flex items-center gap-8">
                     <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors" href="Search-Codes.html">Search Codes</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors" href="Encounter.html">Add Encounter</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
                 </nav>
-                <!-- Profile Section -->
                 <div class="flex items-center gap-4">
                     <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("Logo.png");'></div>
                 </div>
@@ -116,114 +111,79 @@
         </div>
     </header>
 
-    <!-- Header Section -->
     <div class="gradient-bg py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="text-6xl mb-4">🔍</div>
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Search Medical Codes</h1>
+            <div class="text-6xl mb-4">🔗</div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Translate Medical Codes</h1>
             <p class="text-xl text-green-100 max-w-2xl mx-auto">
-                Find and explore NAMASTE and ICD-11 codes for diagnoses, treatments, and medical conditions
+                Translate a NAMASTE code to its corresponding ICD-11 code
             </p>
         </div>
     </div>
 
-    <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- Search Section -->
         <div class="bg-white rounded-2xl shadow-xl p-8 mb-8 card-hover">
             <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-2">Intelligent Code Search</h2>
-                <p class="text-gray-600">Enter symptoms, conditions, or treatments to find matching codes</p>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Code Translation</h2>
+                <p class="text-gray-600">Enter a NAMASTE code to get its ICD-11 mapping</p>
             </div>
             
-            <div class="flex flex-col md:flex-row gap-4 max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
                 <div class="flex-1 relative">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
+                        <i class="fa-solid fa-code text-gray-400"></i>
                     </div>
                     <input 
                         type="text" 
-                        id="searchInput"
-                        placeholder="Search for conditions, symptoms, or treatments..."
+                        id="codeInput"
+                        placeholder="Enter a NAMASTE code (e.g., AAA-1)..."
                         class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-0 search-glow text-lg transition-all duration-200"
                     >
                 </div>
                 <button 
-                    onclick="searchCodes()" 
+                    onclick="translateCode()" 
                     class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
                     <span class="flex items-center justify-center space-x-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                        <span>Search</span>
+                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                        <span>Translate</span>
                     </span>
                 </button>
             </div>
 
-            <!-- Quick Search Suggestions -->
             <div class="mt-6 text-center">
-                <p class="text-sm text-gray-500 mb-3">Quick searches:</p>
+                <p class="text-sm text-gray-500 mb-3">Quick translations:</p>
                 <div class="flex flex-wrap justify-center gap-2">
-                    <button onclick="quickSearch('fever')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">Fever</button>
-                    <button onclick="quickSearch('headache')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">Headache</button>
-                    <button onclick="quickSearch('stress')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">Stress</button>
-                    <button onclick="quickSearch('anxiety')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">Anxiety</button>
-                    <button onclick="quickSearch('cough')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">Cough</button>
+                    <button onclick="quickTranslate('AAA-1')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">AAA-1</button>
+                    <button onclick="quickTranslate('BBB-2')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">BBB-2</button>
+                    <button onclick="quickTranslate('CCC-3')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">CCC-3</button>
+                    <button onclick="quickTranslate('DDD-4')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">DDD-4</button>
+                    <button onclick="quickTranslate('EEE-5')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">EEE-5</button>
                 </div>
             </div>
         </div>
 
-        <!-- Results Section -->
-        <div class="grid lg:grid-cols-2 gap-8">
-            <!-- NAMASTE Results -->
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-green-600 to-green-500 p-6">
-                    <div class="flex items-center space-x-3">
-                        <div class="text-3xl">🌿</div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">NAMASTE Codes</h3>
-                            <p class="text-green-100">Traditional AYUSH System Codes</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div id="namasteResults" class="space-y-4">
-                        <div class="text-center py-12 text-gray-500">
-                            <div class="text-4xl mb-4">🔍</div>
-                            <p class="text-lg">Enter a search term to find NAMASTE codes</p>
-                            <p class="text-sm mt-2">Search for Ayurveda, Yoga, Unani, Siddha, or Homeopathy treatments</p>
-                        </div>
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
+            <div class="bg-gradient-to-r from-green-600 to-green-700 p-6">
+                <div class="flex items-center space-x-3">
+                    <div class="text-3xl">➡️</div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white">Translation Result</h3>
+                        <p class="text-green-100">Mapped ICD-11 Code</p>
                     </div>
                 </div>
             </div>
-
-            <!-- ICD-11 Results -->
-            <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
-                <div class="bg-gradient-to-r from-green-700 to-green-600 p-6">
-                    <div class="flex items-center space-x-3">
-                        <div class="text-3xl">🏥</div>
-                        <div>
-                            <h3 class="text-2xl font-bold text-white">ICD-11 Codes</h3>
-                            <p class="text-green-100">International Classification Codes</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div id="icd11Results" class="space-y-4">
-                        <div class="text-center py-12 text-gray-500">
-                            <div class="text-4xl mb-4">🌐</div>
-                            <p class="text-lg">Enter a search term to find ICD-11 codes</p>
-                            <p class="text-sm mt-2">International standard medical classification system</p>
-                        </div>
+            <div class="p-6">
+                <div id="translationResult" class="space-y-4">
+                    <div class="text-center py-12 text-gray-500">
+                        <div class="text-4xl mb-4">✍️</div>
+                        <p class="text-lg">Enter a NAMASTE code above to begin</p>
+                        <p class="text-sm mt-2">The translated ICD-11 code will be displayed here.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Selected Codes Panel -->
         <div id="selectedCodesPanel" class="hidden mt-8 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 p-8">
             <div class="text-center mb-6">
                 <h3 class="text-2xl font-bold text-green-800 mb-2">Selected Medical Codes</h3>
@@ -246,10 +206,8 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 mt-auto">
         <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Column 1 -->
             <div>
                 <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
                     <i class="fa-solid fa-heart-pulse"></i> AYUSH Dual Coding
@@ -262,19 +220,17 @@
                     <a href="#" class="hover:text-white">Terms of Service</a>
                 </div>
             </div>
-            <!-- Column 2 -->
             <div>
                 <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
                     <i class="fa-solid fa-link"></i> Navigation
                 </h3>
                 <ul class="mt-2 space-y-2 text-sm">
-                    <li><a href="index1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-home"></i>Home</a></li>
-                    <li><a href="Search-Codes1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-magnifying-glass"></i>Search Codes</a></li>
-                    <li><a href="Encounter1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-regular fa-file-lines"></i>Add Encounter</a></li>
-                    <li><a href="about1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-circle-info"></i>About</a></li>
+                    <li><a href="index.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-home"></i>Home</a></li>
+                    <li><a href="Search-Codes.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-magnifying-glass"></i>Search Codes</a></li>
+                    <li><a href="Encounter.html" class="flex items-center gap-2 hover:text-white"><i class="fa-regular fa-file-lines"></i>Add Encounter</a></li>
+                    <li><a href="about.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-circle-info"></i>About</a></li>
                 </ul>
             </div>
-            <!-- Column 3 -->
             <div>
                 <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
                     <i class="fa-solid fa-award"></i> SIH 2025
@@ -286,101 +242,79 @@
                 </ul>
             </div>
         </div>
-        <!-- Bottom copyright -->
         <div class="border-t border-gray-600 text-center py-4 text-sm">
             © 2025 AYUSH Dual Coding System. All rights reserved.
         </div>
     </footer>
 
     <script>
-        // Global variables
         let selectedCodes = [];
 
-        // Search functionality
-        async function searchCodes() {
-            const query = document.getElementById('searchInput').value.trim();
-            if (!query) {
-                showAlert('Please enter a search term', 'warning');
+        async function translateCode() {
+            const code = document.getElementById('codeInput').value.trim();
+            if (!code) {
+                showAlert('Please enter a NAMASTE code.', 'warning');
                 return;
             }
-            showLoadingState();
+
+            // Show a loading state
+            const resultPanel = document.getElementById('translationResult');
+            resultPanel.innerHTML = `
+                <div class="text-center py-12">
+                    <div class="loading-spinner mx-auto mb-4"></div>
+                    <p class="text-gray-500">Translating code...</p>
+                </div>
+            `;
 
             try {
-                // Fetch NAMASTE codes
-                const namasteRes = await fetch(`http://localhost:5000/api/v1/codes/search?type=namaste&query=${encodeURIComponent(query)}`);
-                if (!namasteRes.ok) throw new Error('NAMASTE search failed');
-                const namasteData = await namasteRes.json();
-                displayResults(namasteData, 'namasteResults', 'namaste');
+                const systemUrl = encodeURIComponent("http://ayush.gov.in/fhir/CodeSystem/namaste");
+                const targetUrl = encodeURIComponent("http://id.who.int/icd/release/11/mms");
+                
+                const res = await fetch(`http://localhost:5000/api/v1/codes/translate?system=${systemUrl}&code=${encodeURIComponent(code)}&target=${targetUrl}`);
+                
+                const data = await res.json();
+                
+                if (!res.ok) {
+                    throw new Error(data.message || 'Translation failed.');
+                }
 
-                // Fetch ICD-11 codes
-                const icdRes = await fetch(`http://localhost:5000/api/v1/codes/search?type=icd&query=${encodeURIComponent(query)}`);
-                if (!icdRes.ok) throw new Error('ICD-11 search failed');
-                const icdData = await icdRes.json();
-                displayResults(icdData, 'icd11Results', 'icd11');
+                // Check for a valid map in the response
+                if (data.map && data.map.ICD11Code) {
+                    displayTranslationResult(data.map);
+                } else {
+                    displayTranslationResult(null, 'No corresponding ICD-11 code found.');
+                }
 
             } catch (error) {
-                console.error('Search failed:', error);
-                showAlert('Failed to fetch codes. Please check the server connection.', 'error');
-                hideLoadingState();
+                console.error('Translation error:', error);
+                displayTranslationResult(null, `Error: ${error.message}`);
+                showAlert(`Error: ${error.message}`, 'error');
             }
-        }
-
-        function quickSearch(term) {
-            document.getElementById('searchInput').value = term;
-            searchCodes();
-        }
-
-        function showLoadingState() {
-            document.getElementById('namasteResults').innerHTML = `
-                <div class="text-center py-12">
-                    <div class="loading-spinner mx-auto mb-4"></div>
-                    <p class="text-gray-500">Searching NAMASTE codes...</p>
-                </div>
-            `;
-            document.getElementById('icd11Results').innerHTML = `
-                <div class="text-center py-12">
-                    <div class="loading-spinner mx-auto mb-4"></div>
-                    <p class="text-gray-500">Searching ICD-11 codes...</p>
-                </div>
-            `;
         }
         
-        function hideLoadingState() {
-            // You can add logic here to hide a global loading indicator if you have one
+        function quickTranslate(code) {
+            document.getElementById('codeInput').value = code;
+            translateCode();
         }
 
-        function displayResults(results, containerId, type) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-            
-            if (!Array.isArray(results) || results.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 text-gray-500">
-                        <div class="text-4xl mb-4">🔍</div>
-                        <p class="text-lg">No ${type.toUpperCase()} codes found</p>
-                        <p class="text-sm mt-2">Try different search terms.</p>
-                    </div>
-                `;
-                return;
-            }
+        function displayTranslationResult(map, errorMessage) {
+            const resultPanel = document.getElementById('translationResult');
+            resultPanel.innerHTML = '';
 
-            results.forEach(code => {
-                const badgeClass = type === 'namaste' ? 'badge-namaste' : 'badge-icd11';
-                const categoryBadgeClass = type === 'namaste' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800';
-
+            if (map) {
                 const resultHtml = `
-                    <div class="result-item border-2 border-gray-200 rounded-xl p-4 transition-all duration-200 hover:border-green-300 hover:bg-green-50">
+                    <div class="result-item border-2 border-gray-200 rounded-xl p-4 transition-all duration-200 hover:border-green-300 hover:bg-green-50 fade-in">
                         <div class="flex justify-between items-start">
                             <div class="flex-1">
                                 <div class="flex items-center space-x-2 mb-2">
-                                    <span class="${badgeClass} text-white px-3 py-1 rounded-full text-sm font-semibold">${code.code}</span>
-                                    <span class="${categoryBadgeClass} px-2 py-1 rounded-full text-xs font-medium">${code.category || 'N/A'}</span>
+                                    <span class="badge-namaste text-white px-3 py-1 rounded-full text-sm font-semibold">${map.code}</span>
+                                    <span class="badge-icd11 text-white px-3 py-1 rounded-full text-sm font-semibold">${map.ICD11Code}</span>
                                 </div>
-                                <h4 class="font-semibold text-gray-800 mb-1">${code.display}</h4>
-                                <p class="text-sm text-gray-600">${code.description || ''}</p>
+                                <h4 class="font-semibold text-gray-800 mb-1">${map.namasteName}</h4>
+                                <p class="text-sm text-gray-600"><strong>ICD-11 Name:</strong> ${map.ICD11Name}</p>
                             </div>
                             <button 
-                                onclick="addCode('${type}', '${code.code}', '${code.display}', '${code.category}')"
+                                onclick="addTranslatedCode('${map.code}', '${map.namasteName}', '${map.ICD11Code}', '${map.ICD11Name}')"
                                 class="ml-4 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105"
                             >
                                 + Add
@@ -388,25 +322,33 @@
                         </div>
                     </div>
                 `;
-                container.insertAdjacentHTML('beforeend', resultHtml);
-            });
+                resultPanel.insertAdjacentHTML('beforeend', resultHtml);
+            } else {
+                resultPanel.innerHTML = `
+                    <div class="text-center py-12 text-gray-500 fade-in">
+                        <div class="text-4xl mb-4">⚠️</div>
+                        <p class="text-lg">Translation Failed</p>
+                        <p class="text-sm mt-2">${errorMessage || 'An unknown error occurred.'}</p>
+                    </div>
+                `;
+            }
         }
 
-        function addCode(type, code, display, category) {
-            const existingCode = selectedCodes.find(c => c.code === code && c.type === type);
+        function addTranslatedCode(namasteCode, namasteDisplay, icd11Code, icd11Display) {
+            const existingCode = selectedCodes.find(c => c.namaste.code === namasteCode);
             if (existingCode) {
-                showAlert('Code already selected', 'warning');
+                showAlert('This code pair has already been added.', 'warning');
                 return;
             }
+
             selectedCodes.push({
-                type: type,
-                code: code,
-                display: display,
-                category: category,
+                namaste: { code: namasteCode, display: namasteDisplay },
+                icd11: { code: icd11Code, display: icd11Display },
                 timestamp: new Date().toISOString()
             });
+
             updateSelectedCodesPanel();
-            showAlert(`${type.toUpperCase()} code ${code} added successfully!`, 'success');
+            showAlert(`Code pair added successfully!`, 'success');
         }
 
         function updateSelectedCodesPanel() {
@@ -422,11 +364,10 @@
                         <div class="flex justify-between items-start">
                             <div class="flex-1">
                                 <div class="flex items-center space-x-2 mb-2">
-                                    <span class="${code.type === 'namaste' ? 'badge-namaste' : 'badge-icd11'} text-white px-3 py-1 rounded-full text-sm font-semibold">${code.code}</span>
-                                    <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs font-medium">${code.category || ''}</span>
-                                    <span class="bg-${code.type === 'namaste' ? 'green' : 'blue'}-100 text-${code.type === 'namaste' ? 'green' : 'blue'}-800 px-2 py-1 rounded-full text-xs font-medium">${code.type.toUpperCase()}</span>
+                                    <span class="badge-namaste text-white px-3 py-1 rounded-full text-sm font-semibold">${code.namaste.code}</span>
+                                    <span class="badge-icd11 text-white px-3 py-1 rounded-full text-sm font-semibold">${code.icd11.code}</span>
                                 </div>
-                                <h4 class="font-semibold text-gray-800">${code.display}</h4>
+                                <h4 class="font-semibold text-gray-800">${code.namaste.display} / ${code.icd11.display}</h4>
                                 <p class="text-xs text-gray-500 mt-1">Added: ${new Date(code.timestamp).toLocaleString()}</p>
                             </div>
                             <button 
@@ -447,16 +388,15 @@
             const removedCode = selectedCodes[index];
             selectedCodes.splice(index, 1);
             updateSelectedCodesPanel();
-            showAlert(`Code ${removedCode.code} removed`, 'info');
+            showAlert(`Code pair for ${removedCode.namaste.code} removed`, 'info');
         }
 
         function proceedToEncounter() {
             if (selectedCodes.length === 0) {
-                showAlert('Please select at least one code before proceeding', 'warning');
+                showAlert('Please select at least one code pair before proceeding', 'warning');
                 return;
             }
             
-            // This is where you would redirect to the encounter page
             const selectedCodesString = JSON.stringify(selectedCodes);
             localStorage.setItem('selectedCodes', selectedCodesString);
             window.location.href = 'Encounter.html';
@@ -490,15 +430,13 @@
             }, 3000);
         }
 
-        // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            document.getElementById('codeInput').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
-                    searchCodes();
+                    translateCode();
                 }
             });
         });
     </script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9821de8db50a2967',t:'MTc1ODM3NzAzOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>

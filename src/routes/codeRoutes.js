@@ -12,6 +12,6 @@ router.get("/search", searchCodes);
 router.get("/map", updateMappings);
 router.post("/upload", uploadCSV);
 router.post("/createConceptMap", createConceptMap);
-router.get("/translate", translate).post("/translate", translate);
+router.get("/translate", translate);
 
 module.exports = router;
