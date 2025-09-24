@@ -17,7 +17,6 @@ const conceptSchema = new mongoose.Schema(
     designation: [{ language: String, value: String }],
     ICD11Code: {
       type: String,
-      select: false,
     },
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }

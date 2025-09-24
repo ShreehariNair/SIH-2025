@@ -246,7 +246,7 @@ exports.getConceptMap = async (req, res, next) => {
 };
 exports.updateMappings = async (req, res, next) => {
   try {
-    const namasteMap = await loadNamaste("data/mapping.csv");
+    const namasteMap = await loadNamaste("data/namaste_codes.csv");
     const data = await Promise.all(
       namasteMap.map(
         async (map) =>
@@ -292,89 +292,78 @@ exports.translate = async (req, res, next) => {
     if (!query?.system || !query?.target) {
       return res.status(400).json({
         status: "error",
-        message: "Please specify a valid source and target CodeSystem"
+        message: "Please specify a valid source and target CodeSystem",
       });
     }
     if (!query?.code) {
       return res.status(404).json({
         status: "fail",
-        message: "Please enter a valid Namaste code"
+        message: "Please enter a valid Namaste code",
       });
     }
 
-    // Now, instead of finding the NAMASTE code in the local database,
-    // we assume the code and its display name are already known or
-    // will be determined by the client. The ICD-11 code and name
-    // will be fetched from an external service.
-
-    // A placeholder to hold the NAMASTE code and display name.
-    // In a real-world scenario, you might get this from another external API.
-    // For this demonstration, we'll assume the code is valid.
     const namasteCode = query.code;
-    const namasteDisplay = "Placeholder Namaste Name"; // This should be fetched from an external source.
-
-    // The logic to find the ICD-11 code still relies on your local mapping.
-    // Since you want both codes from the "link," this implies the "link"
-    // (your `/translate` endpoint) should perform both lookups.
-    // We'll simulate this by first getting the ICD-11 code from your local Concept model.
 
     const map = await Concept.findOne(
-        { code: namasteCode },
-        "code ICD11Code display"
+      { code: namasteCode },
+      "code ICD11Code display"
     );
 
     if (!map) {
-        return res.status(404).json({
-            status: "fail",
-            message: `No mapping found for code: ${namasteCode}. Please ensure the code exists in the database.`
-        });
+      return res.status(404).json({
+        status: "fail",
+        message: `No mapping found for code: ${namasteCode}. Please ensure the code exists in the database.`,
+      });
     }
 
     if (!map.ICD11Code) {
-        return res.status(404).json({
-            status: "fail",
-            message: `The Namaste code ${namasteCode} does not have an ICD-11 mapping.`
-        });
+      return res.status(404).json({
+        status: "fail",
+        message: `The Namaste code ${namasteCode} does not have an ICD-11 mapping.`,
+      });
     }
 
     // Prepare the response data object
     const responseMap = {
-        code: map.code,
-        ICD11Code: map.ICD11Code,
-        namasteName: map.display,
+      code: map.code,
+      ICD11Code: map.ICD11Code,
+      namasteName: map.display,
     };
 
     // Fetch the display name for the ICD-11 code using the external utility
     let icd11Data;
     try {
-        icd11Data = await fetchICD11(responseMap);
+      icd11Data = await fetchICD11(responseMap);
     } catch (fetchErr) {
-        console.error('Error fetching ICD-11 details:', fetchErr);
-        return res.status(500).json({
-            status: "error",
-            message: "Server error: Failed to retrieve ICD-11 display name."
-        });
+      console.error("Error fetching ICD-11 details:", fetchErr);
+      return res.status(500).json({
+        status: "error",
+        message: "Server error: Failed to retrieve ICD-11 display name.",
+      });
     }
-    
+
     // Extract the display name from the ICD-11 response
-    const displayParameter = icd11Data?.parameter.find(d => d?.name === "display");
-    responseMap.ICD11Name = displayParameter?.valueString || "ICD-11 name not found";
+    const displayParameter = icd11Data?.parameter.find(
+      (d) => d?.name === "display"
+    );
+    responseMap.ICD11Name =
+      displayParameter?.valueString || "ICD-11 name not found";
 
     // Create a FHIR Parameters resource for the final response
-    const fhirResponse = createParameterResource(responseMap);
+    // const fhirResponse = createParameterResource(responseMap);
 
     res.status(200).json({
       status: "success",
       map: responseMap,
       message: "Translated NAMASTE code to ICD-11 code",
-      fhirResource: fhirResponse
+      // fhirResource: fhirResponse
     });
-
   } catch (err) {
     console.error("Translation error:", err);
     res.status(500).json({
       status: "error",
-      message: "Server error during translation. Please check the backend logs."
+      message:
+        "Server error during translation. Please check the backend logs.",
     });
   }
 };
