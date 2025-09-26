@@ -18,6 +18,7 @@ const conceptSchema = new mongoose.Schema(
     ICD11Code: {
       type: String,
     },
+    nameEnglish: String,
   },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );

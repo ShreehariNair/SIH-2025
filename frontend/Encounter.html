@@ -19,7 +19,10 @@
         },
       };
     </script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
       body {
@@ -147,7 +150,10 @@
     </style>
   </head>
   <body class="bg-gray-50 min-h-screen">
-    <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
+    <!-- Navigation -->
+    <header
+      class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm"
+    >
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center gap-4">
@@ -159,13 +165,38 @@
             <h2 class="text-lg font-bold text-black">AYUSH</h2>
           </div>
           <nav class="hidden md:flex items-center gap-8">
-            <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
-            <a class="text-sm font-medium hover:text-primary transition-colors" href="Search-Codes.html">Search Codes</a>
-            <a class="text-sm font-medium hover:text-primary transition-colors" href="Encounter.html">Add Encounter</a>
-            <a class="text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors"
+              href="index.html"
+              >Home</a
+            >
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors"
+              href="search-codes.html"
+              >Search Codes</a
+            >
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors"
+              href="search.html"
+              >Search Diseases</a
+            >
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors"
+              href="encounter.html"
+              >Add Encounter</a
+            >
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors"
+              href="about.html"
+              >About</a
+            >
           </nav>
           <div class="flex items-center gap-4">
-           <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("Logo.png");'></div>
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style="background-image: url('')"
+            ></div>
+          </div>
         </div>
       </div>
     </header>
@@ -279,37 +310,97 @@
           </div>
         </div>
       </div>
-      <div id="newPatientModal" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden transition-opacity duration-300">
-        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-lg w-full transform scale-95 transition-transform duration-300">
+      <div
+        id="newPatientModal"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden transition-opacity duration-300"
+      >
+        <div
+          class="bg-white rounded-2xl shadow-xl p-8 max-w-lg w-full transform scale-95 transition-transform duration-300"
+        >
           <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold text-gray-800">New Patient</h2>
-            <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 transition-colors">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <button
+              onclick="closeModal()"
+              class="text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <svg
+                class="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                ></path>
+              </svg>
             </button>
           </div>
           <form id="newPatientForm" class="space-y-4">
             <div class="flex flex-col">
-              <label for="newPatientId" class="text-sm font-medium text-gray-700">Patient ID <span class="text-red-500">*</span></label>
-              <input type="text" id="newPatientId" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50" placeholder="Enter patient ID">
+              <label
+                for="newPatientId"
+                class="text-sm font-medium text-gray-700"
+                >Patient ID <span class="text-red-500">*</span></label
+              >
+              <input
+                type="text"
+                id="newPatientId"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50"
+                placeholder="Enter patient ID"
+              />
             </div>
             <div class="flex flex-col">
-              <label for="newPatientName" class="text-sm font-medium text-gray-700">Patient Name <span class="text-red-500">*</span></label>
-              <input type="text" id="newPatientName" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50" placeholder="Enter patient name">
+              <label
+                for="newPatientName"
+                class="text-sm font-medium text-gray-700"
+                >Patient Name <span class="text-red-500">*</span></label
+              >
+              <input
+                type="text"
+                id="newPatientName"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50"
+                placeholder="Enter patient name"
+              />
             </div>
             <div class="flex flex-col">
-              <label for="newPatientDob" class="text-sm font-medium text-gray-700">Date of Birth</label>
-              <input type="date" id="newPatientDob" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50">
+              <label
+                for="newPatientDob"
+                class="text-sm font-medium text-gray-700"
+                >Date of Birth</label
+              >
+              <input
+                type="date"
+                id="newPatientDob"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50"
+              />
             </div>
             <div class="flex flex-col">
-              <label for="newPatientGender" class="text-sm font-medium text-gray-700">Gender</label>
-              <select id="newPatientGender" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50">
+              <label
+                for="newPatientGender"
+                class="text-sm font-medium text-gray-700"
+                >Gender</label
+              >
+              <select
+                id="newPatientGender"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50"
+              >
                 <option value="">Select Gender</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
               </select>
             </div>
-            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">Create Patient</button>
+            <button
+              type="submit"
+              class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105"
+            >
+              Create Patient
+            </button>
           </form>
         </div>
       </div>
@@ -537,10 +628,41 @@
             <i class="fa-solid fa-link"></i> Navigation
           </h3>
           <ul class="mt-2 space-y-2 text-sm">
-            <li><a href="index1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-home"></i>Home</a></li>
-            <li><a href="Search-Codes1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-magnifying-glass"></i>Search Codes</a></li>
-            <li><a href="Encounter1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-regular fa-file-lines"></i>Add Encounter</a></li>
-            <li><a href="about1.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-circle-info"></i>About</a></li>
+            <li>
+              <a
+                href="index.html"
+                class="flex items-center gap-2 hover:text-white"
+                ><i class="fa-solid fa-home"></i>Home</a
+              >
+            </li>
+            <li>
+              <a
+                href="search-codes.html"
+                class="flex items-center gap-2 hover:text-white"
+                ><i class="fa-solid fa-magnifying-glass"></i>Search Codes</a
+              >
+            </li>
+            <li>
+              <a
+                href="search.html"
+                class="flex items-center gap-2 hover:text-white"
+                ><i class="fa-solid fa-magnifying-glass"></i>Search Diseases</a
+              >
+            </li>
+            <li>
+              <a
+                href="encounter.html"
+                class="flex items-center gap-2 hover:text-white"
+                ><i class="fa-regular fa-file-lines"></i>Add Encounter</a
+              >
+            </li>
+            <li>
+              <a
+                href="about.html"
+                class="flex items-center gap-2 hover:text-white"
+                ><i class="fa-solid fa-circle-info"></i>About</a
+              >
+            </li>
           </ul>
         </div>
         <div>
@@ -565,21 +687,29 @@
 
       // Fetches patient data from the backend based on Patient ID
       async function fetchPatientData() {
-        const patientId = document.getElementById('patientIdInput').value.trim().toUpperCase();
+        const patientId = document
+          .getElementById("patientIdInput")
+          .value.trim()
+          .toUpperCase();
         if (!patientId) {
-          showAlert('Please enter a Patient ID', 'warning');
+          showAlert("Please enter a Patient ID", "warning");
           return;
         }
 
         try {
-          const res = await fetch(`http://localhost:5000/api/v1/encounters/${patientId}`);
+          const res = await fetch(
+            `http://localhost:5000/api/v1/encounters/${patientId}`
+          );
           if (!res.ok) {
             if (res.status === 404) {
-              showAlert(`Patient ID ${patientId} not found. You can create a new record by adding their details and saving.`, 'info');
+              showAlert(
+                `Patient ID ${patientId} not found. You can create a new record by adding their details and saving.`,
+                "info"
+              );
               // Clear patient info fields for new patient
-              document.getElementById('patientNameInput').value = '';
-              document.getElementById('patientDobInput').value = '';
-              document.getElementById('patientGenderInput').value = '';
+              document.getElementById("patientNameInput").value = "";
+              document.getElementById("patientDobInput").value = "";
+              document.getElementById("patientGenderInput").value = "";
               currentPatient = null;
               return;
             }
@@ -589,17 +719,24 @@
           currentPatient = data;
           displayPatientInfo(currentPatient);
           displayPatientHistory(currentPatient);
-          document.getElementById('patientInfoSection').classList.remove('hidden');
-          document.getElementById('patientHistorySection').classList.remove('hidden');
-          showAlert(`Patient ${currentPatient.name} loaded successfully!`, 'success');
+          document
+            .getElementById("patientInfoSection")
+            .classList.remove("hidden");
+          document
+            .getElementById("patientHistorySection")
+            .classList.remove("hidden");
+          showAlert(
+            `Patient ${currentPatient.name} loaded successfully!`,
+            "success"
+          );
         } catch (err) {
-          showAlert(err.message, 'error');
+          showAlert(err.message, "error");
           console.error("Fetch patient data error:", err);
         }
       }
 
       function quickPatientSearch(patientId) {
-        document.getElementById('patientIdInput').value = patientId;
+        document.getElementById("patientIdInput").value = patientId;
         fetchPatientData();
       }
 
@@ -618,7 +755,7 @@
           namaste: { code: namasteCode, display: namasteCode }, // Using code as display name for now
           icd11: { code: icd11Code, display: icd11Code }, // Using code as display name for now
           notes: clinicalNotes,
-          recordedAt: new Date().toISOString()
+          recordedAt: new Date().toISOString(),
         };
 
         currentSession.push(newDiagnosis);
@@ -633,9 +770,9 @@
 
       // Updates the current session display section
       function updateCurrentSession() {
-        const sessionContent = document.getElementById('currentSessionContent');
-        sessionContent.innerHTML = '';
-        const sessionActions = document.getElementById('sessionActions');
+        const sessionContent = document.getElementById("currentSessionContent");
+        sessionContent.innerHTML = "";
+        const sessionActions = document.getElementById("sessionActions");
 
         if (currentSession.length === 0) {
           sessionContent.innerHTML = `
@@ -645,17 +782,29 @@
               <p class="text-sm mt-2">Add diagnoses to start building the encounter</p>
             </div>
           `;
-          sessionActions.classList.add('hidden');
+          sessionActions.classList.add("hidden");
         } else {
-          const listHtml = currentSession.map((diag, index) => `
+          const listHtml = currentSession
+            .map(
+              (diag, index) => `
             <div class="p-4 bg-gray-100 rounded-lg flex items-start space-x-4 slide-in">
               <div class="flex-1">
                 <div class="flex items-center space-x-2 mb-2">
-                  <span class="px-3 py-1 text-xs font-semibold rounded-full badge-namaste text-white">${diag.namaste.code}</span>
-                  <span class="px-3 py-1 text-xs font-semibold rounded-full badge-icd11 text-white">${diag.icd11.code}</span>
+                  <span class="px-3 py-1 text-xs font-semibold rounded-full badge-namaste text-white">${
+                    diag.namaste.code
+                  }</span>
+                  <span class="px-3 py-1 text-xs font-semibold rounded-full badge-icd11 text-white">${
+                    diag.icd11.code
+                  }</span>
                 </div>
-                <p class="text-gray-800 font-medium">${diag.namaste.display} / ${diag.icd11.display}</p>
-                ${diag.notes ? `<p class="text-sm text-gray-600 mt-1">Notes: ${diag.notes}</p>` : ''}
+                <p class="text-gray-800 font-medium">${
+                  diag.namaste.display
+                } / ${diag.icd11.display}</p>
+                ${
+                  diag.notes
+                    ? `<p class="text-sm text-gray-600 mt-1">Notes: ${diag.notes}</p>`
+                    : ""
+                }
               </div>
               <button onclick="removeDiagnosis(${index})" class="text-red-500 hover:text-red-700 transition-colors duration-200">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -663,10 +812,12 @@
                 </svg>
               </button>
             </div>
-          `).join('');
+          `
+            )
+            .join("");
 
           sessionContent.innerHTML = listHtml;
-          sessionActions.classList.remove('hidden');
+          sessionActions.classList.remove("hidden");
         }
       }
 
@@ -678,13 +829,21 @@
 
       async function saveEncounter() {
         if (!currentPatient) {
-          const patientId = document.getElementById('patientIdInput').value.trim();
-          const patientName = document.getElementById('patientNameInput')?.value.trim();
-          const patientDob = document.getElementById('patientDobInput')?.value;
-          const patientGender = document.getElementById('patientGenderInput')?.value;
+          const patientId = document
+            .getElementById("patientIdInput")
+            .value.trim();
+          const patientName = document
+            .getElementById("patientNameInput")
+            ?.value.trim();
+          const patientDob = document.getElementById("patientDobInput")?.value;
+          const patientGender =
+            document.getElementById("patientGenderInput")?.value;
 
           if (!patientId || !patientName) {
-            showAlert('Please enter Patient ID and Name to create a new record', 'warning');
+            showAlert(
+              "Please enter Patient ID and Name to create a new record",
+              "warning"
+            );
             return;
           }
 
@@ -695,9 +854,9 @@
             gender: patientGender,
           };
         }
-        
+
         if (currentSession.length === 0) {
-          showAlert('Please add at least one diagnosis to save', 'warning');
+          showAlert("Please add at least one diagnosis to save", "warning");
           return;
         }
 
@@ -706,22 +865,25 @@
           patientName: currentPatient.name,
           patientDob: currentPatient.dob,
           patientGender: currentPatient.gender,
-          diagnoses: currentSession
+          diagnoses: currentSession,
         };
 
         try {
-          const res = await fetch("http://localhost:5000/api/v1/encounters/upload", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
+          const res = await fetch(
+            "http://localhost:5000/api/v1/encounters/upload",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            }
+          );
 
           if (!res.ok) throw new Error("Failed to save encounter");
 
           const updatedPatient = await res.json();
           currentPatient = updatedPatient;
           currentSession = [];
-          
+
           updateCurrentSession();
           displayPatientInfo(currentPatient);
           displayPatientHistory(currentPatient);
@@ -732,61 +894,82 @@
           console.error("Save encounter error:", err);
         }
       }
-      
+
       // Display patient info in the header section
       function displayPatientInfo(patient) {
-        document.getElementById('patientName').textContent = patient.name;
-        document.getElementById('displayPatientId').textContent = patient.patientId;
-        document.getElementById('patientDetails').textContent = `DOB: ${new Date(patient.dob).toLocaleDateString()} | Gender: ${patient.gender}`;
-        document.getElementById('totalEncounters').textContent = patient.encounters.length;
-        document.getElementById('activeDiagnoses').textContent = patient.activeDiagnoses;
-        document.getElementById('lastVisit').textContent = patient.lastVisit ? new Date(patient.lastVisit).toLocaleDateString() : 'N/A';
-      } 
+        document.getElementById("patientName").textContent = patient.name;
+        document.getElementById("displayPatientId").textContent =
+          patient.patientId;
+        document.getElementById(
+          "patientDetails"
+        ).textContent = `DOB: ${new Date(
+          patient.dob
+        ).toLocaleDateString()} | Gender: ${patient.gender}`;
+        document.getElementById("totalEncounters").textContent =
+          patient.encounters.length;
+        document.getElementById("activeDiagnoses").textContent =
+          patient.activeDiagnoses;
+        document.getElementById("lastVisit").textContent = patient.lastVisit
+          ? new Date(patient.lastVisit).toLocaleDateString()
+          : "N/A";
+      }
 
       // Display patient history timeline
       function displayPatientHistory(patient) {
-        const historyContent = document.getElementById('patientHistoryContent');
-        historyContent.innerHTML = '';
+        const historyContent = document.getElementById("patientHistoryContent");
+        historyContent.innerHTML = "";
         if (patient.encounters.length === 0) {
           historyContent.innerHTML = `<div class="text-center py-8 text-gray-500"><div class="text-4xl mb-4">📜</div><p>No past encounters found for this patient.</p></div>`;
           return;
         }
 
-        const sortedEncounters = patient.encounters.sort((a, b) => new Date(b.date) - new Date(a.date));
+        const sortedEncounters = patient.encounters.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
 
-        historyContent.innerHTML = sortedEncounters.map((encounter, index) => {
-          const date = new Date(encounter.date).toLocaleDateString();
-          const diagnosesHtml = encounter.diagnoses.map(diag => `
+        historyContent.innerHTML = sortedEncounters
+          .map((encounter, index) => {
+            const date = new Date(encounter.date).toLocaleDateString();
+            const diagnosesHtml = encounter.diagnoses
+              .map(
+                (diag) => `
             <div class="mt-2 text-sm">
               <span class="font-semibold text-gray-800">${diag.namaste?.code}</span>
               <span class="text-gray-600">- ${diag.namaste?.display}</span>
               <span class="text-gray-400"> (ICD-11: ${diag.icd11?.code})</span>
             </div>
-          `).join('');
+          `
+              )
+              .join("");
 
-          return `
+            return `
             <div class="relative pl-6 pb-8 timeline-item">
-              ${index < sortedEncounters.length - 1 ? '<div class="timeline-line"></div>' : ''}
+              ${
+                index < sortedEncounters.length - 1
+                  ? '<div class="timeline-line"></div>'
+                  : ""
+              }
               <div class="mb-2">
                 <span class="text-sm font-semibold text-gray-700">${date}</span>
               </div>
               ${diagnosesHtml}
             </div>
           `;
-        }).join('');
+          })
+          .join("");
       }
-      
+
       function showAlert(message, type) {
-        const existingAlert = document.querySelector('.alert-box');
+        const existingAlert = document.querySelector(".alert-box");
         if (existingAlert) existingAlert.remove();
 
-        const alertBox = document.createElement('div');
+        const alertBox = document.createElement("div");
         alertBox.className = `alert-box p-3 border rounded-lg shadow-lg fade-in`;
         const alertColors = {
-          success: 'bg-green-100 border-green-400 text-green-700',
-          warning: 'bg-yellow-100 border-yellow-400 text-yellow-700',
-          error: 'bg-red-100 border-red-400 text-red-700',
-          info: 'bg-blue-100 border-blue-400 text-blue-700'
+          success: "bg-green-100 border-green-400 text-green-700",
+          warning: "bg-yellow-100 border-yellow-400 text-yellow-700",
+          error: "bg-red-100 border-red-400 text-red-700",
+          info: "bg-blue-100 border-blue-400 text-blue-700",
         };
 
         alertBox.className += ` ${alertColors[type]}`;
@@ -794,52 +977,54 @@
         document.body.appendChild(alertBox);
 
         setTimeout(() => {
-          alertBox.classList.remove('fade-in');
-          alertBox.classList.add('opacity-0');
+          alertBox.classList.remove("fade-in");
+          alertBox.classList.add("opacity-0");
           setTimeout(() => alertBox.remove(), 300);
         }, 3000);
       }
 
       // Initial load and event listeners
-      document.addEventListener('DOMContentLoaded', () => {
+      document.addEventListener("DOMContentLoaded", () => {
         // Check for any codes from localStorage and populate session
-        const selectedCodesString = localStorage.getItem('selectedCodes');
+        const selectedCodesString = localStorage.getItem("selectedCodes");
         if (selectedCodesString) {
           currentSession = JSON.parse(selectedCodesString);
           updateCurrentSession();
-          localStorage.removeItem('selectedCodes');
+          localStorage.removeItem("selectedCodes");
         }
       });
 
       function showCreatePatientModal() {
-        const modal = document.getElementById('newPatientModal');
-        modal.classList.remove('hidden');
-        modal.querySelector('div').classList.remove('scale-95');
-        modal.querySelector('div').classList.add('scale-100');
+        const modal = document.getElementById("newPatientModal");
+        modal.classList.remove("hidden");
+        modal.querySelector("div").classList.remove("scale-95");
+        modal.querySelector("div").classList.add("scale-100");
       }
-      
+
       // Close the modal and reset the form
       function closeModal() {
-        const modal = document.getElementById('newPatientModal');
-        modal.querySelector('div').classList.remove('scale-100');
-        modal.querySelector('div').classList.add('scale-95');
+        const modal = document.getElementById("newPatientModal");
+        modal.querySelector("div").classList.remove("scale-100");
+        modal.querySelector("div").classList.add("scale-95");
         setTimeout(() => {
-          modal.classList.add('hidden');
-          document.getElementById('newPatientForm').reset();
+          modal.classList.add("hidden");
+          document.getElementById("newPatientForm").reset();
         }, 300);
       }
 
       // New patient creation function, called from the modal form submission
       async function createNewPatientFromModal(event) {
         event.preventDefault(); // Prevents the form from submitting in the traditional way
-        
-        const patientId = document.getElementById('newPatientId').value.trim();
-        const patientName = document.getElementById('newPatientName').value.trim();
-        const patientDob = document.getElementById('newPatientDob').value;
-        const patientGender = document.getElementById('newPatientGender').value;
-        
+
+        const patientId = document.getElementById("newPatientId").value.trim();
+        const patientName = document
+          .getElementById("newPatientName")
+          .value.trim();
+        const patientDob = document.getElementById("newPatientDob").value;
+        const patientGender = document.getElementById("newPatientGender").value;
+
         if (!patientId || !patientName) {
-          showAlert('Patient ID and Name are required.', 'warning');
+          showAlert("Patient ID and Name are required.", "warning");
           return;
         }
 
@@ -848,44 +1033,58 @@
           patientName: patientName,
           patientDob: patientDob,
           patientGender: patientGender,
-          diagnoses: []
+          diagnoses: [],
         };
 
         try {
-          const res = await fetch("http://localhost:5000/api/v1/encounters/upload", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-          
+          const res = await fetch(
+            "http://localhost:5000/api/v1/encounters/upload",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            }
+          );
+
           if (!res.ok) {
             if (res.status === 409) {
-              showAlert(`Patient ID ${patientId} already exists.`, 'error');
+              showAlert(`Patient ID ${patientId} already exists.`, "error");
             } else {
               throw new Error("Failed to create new patient");
             }
             return;
           }
-          
+
           const newPatient = await res.json();
           currentPatient = newPatient;
           displayPatientInfo(currentPatient);
           closeModal(); // Close the modal on success
-          
-          document.getElementById('patientInfoSection').classList.remove('hidden');
-          document.getElementById('patientHistorySection').classList.remove('hidden');
-          showAlert(`New patient record for ${newPatient.name} created successfully!`, 'success');
+
+          document
+            .getElementById("patientInfoSection")
+            .classList.remove("hidden");
+          document
+            .getElementById("patientHistorySection")
+            .classList.remove("hidden");
+          showAlert(
+            `New patient record for ${newPatient.name} created successfully!`,
+            "success"
+          );
         } catch (err) {
           showAlert("Error creating new patient: " + err.message, "error");
           console.error("Create new patient error:", err);
         }
       }
-      
+
       // Listen for the form submission
-      document.getElementById('newPatientForm').addEventListener('submit', createNewPatientFromModal);
-      
+      document
+        .getElementById("newPatientForm")
+        .addEventListener("submit", createNewPatientFromModal);
+
       // Attach the modal opening function to the button
-      document.querySelector('.px-4.py-2.bg-blue-100').addEventListener('click', showCreatePatientModal);
+      document
+        .querySelector(".px-4.py-2.bg-blue-100")
+        .addEventListener("click", showCreatePatientModal);
     </script>
   </body>
 </html>

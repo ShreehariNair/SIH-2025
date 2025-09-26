@@ -415,3 +415,64 @@ exports.fhirTranslate = async (req, res, next) => {
     });
   }
 };
+
+exports.updateEnglishTerms = async (req, res, next) => {
+  try {
+    const data = await loadNamaste("data/sample_search.csv");
+    console.log(data);
+
+    await Promise.all(
+      data.map(
+        async (d) =>
+          await Concept.updateOne(
+            { code: d.NAMC_CODE },
+            { nameEnglish: d.Name_English }
+          )
+      )
+    );
+
+    res.status(200).json({
+      status: "success",
+      message: "All ingested English terms are updated",
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+};
+
+exports.searchTerms = async (req, res, next) => {
+  try {
+    if (!req.query?.q)
+      return res
+        .status(404)
+        .json({ status: "fail", message: "Invalid search query entered" });
+
+    const results = await Concept.find(
+      {
+        nameEnglish: { $regex: req.query.q, $options: "i" },
+      },
+      "code display ICD11Code nameEnglish",
+      { limit: 5 }
+    );
+
+    if (!results.length)
+      res
+        .status(404)
+        .json({ status: "fail", message: "No search results found" });
+
+    res.status(200).json({
+      status: "success",
+      results,
+      length: results.length,
+      message: "Search results found",
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err.message,
+    });
+  }
+};
