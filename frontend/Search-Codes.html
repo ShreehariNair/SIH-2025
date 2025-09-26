@@ -1,308 +1,461 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AYUSH Dual Coding - Translate Medical Codes</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'green-primary': '#059669',
-                        'green-secondary': '#10b981',
-                        'green-light': '#d1fae5',
-                        'green-dark': '#047857',
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "green-primary": "#059669",
+              "green-secondary": "#10b981",
+              "green-light": "#d1fae5",
+              "green-dark": "#047857",
+            },
+          },
+        },
+      };
     </script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet"/>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      rel="stylesheet"
+    />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .gradient-bg {
+        background: linear-gradient(
+          135deg,
+          #059669 0%,
+          #10b981 50%,
+          #34d399 100%
+        );
+      }
+
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .pulse-animation {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
-        
-        .card-hover {
-            transition: all 0.3s ease;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .search-glow:focus {
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+      }
+
+      .result-item {
+        transition: all 0.2s ease;
+      }
+
+      .result-item:hover {
+        background-color: #f0fdf4;
+        border-color: #10b981;
+      }
+
+      .loading-spinner {
+        border: 3px solid #d1fae5;
+        border-top: 3px solid #10b981;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
         }
-        
-        .pulse-animation {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        100% {
+          transform: rotate(360deg);
         }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .search-glow:focus {
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
-        }
-        
-        .result-item {
-            transition: all 0.2s ease;
-        }
-        
-        .result-item:hover {
-            background-color: #f0fdf4;
-            border-color: #10b981;
-        }
-        
-        .loading-spinner {
-            border: 3px solid #d1fae5;
-            border-top: 3px solid #10b981;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .badge-namaste {
-            background: linear-gradient(135deg, #059669, #10b981);
-        }
-        
-        .badge-icd11 {
-            background: linear-gradient(135deg, #047857, #059669);
-        }
+      }
+
+      .badge-namaste {
+        background: linear-gradient(135deg, #059669, #10b981);
+      }
+
+      .badge-icd11 {
+        background: linear-gradient(135deg, #047857, #059669);
+      }
     </style>
-</head>
-<body class="bg-gray-50 min-h-screen">
-    <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-4">
-                    <div class="text-green-600 size-8">
-                        <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z" fill="currentColor"></path>
-                        </svg>
-                    </div>
-                    <h2 class="text-lg font-bold text-black">AYUSH</h2>
-                </div>
-                <nav class="hidden md:flex items-center gap-8">
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="Search-Codes.html">Search Codes</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="Encounter.html">Add Encounter</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
-                </nav>
-                <div class="flex items-center gap-4">
-                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" style='background-image: url("Logo.png");'></div>
-                </div>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <header
+      class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm"
+    >
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center gap-4">
+            <div class="text-primary size-8">
+              <svg
+                fill="none"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"
+                  fill="#39e079"
+                ></path>
+              </svg>
             </div>
+            <h2 class="text-lg font-bold text-slate-900 dark:text-white">
+              AYUSH
+            </h2>
+          </div>
+          <nav class="hidden md:flex items-center gap-8">
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors"
+              href="index.html"
+              >Home</a
+            >
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors"
+              href="search-codes.html"
+              >Search Codes</a
+            >
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors"
+              href="search.html"
+              >Search Diseases</a
+            >
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors"
+              href="encounter.html"
+              >Add Encounter</a
+            >
+            <a
+              class="text-sm font-medium hover:text-primary transition-colors"
+              href="about.html"
+              >About</a
+            >
+          </nav>
+          <div class="flex items-center gap-4">
+            <div
+              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+              style="background-image: url('')"
+            ></div>
+          </div>
         </div>
+      </div>
     </header>
 
     <div class="gradient-bg py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="text-6xl mb-4">🔗</div>
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">Translate Medical Codes</h1>
-            <p class="text-xl text-green-100 max-w-2xl mx-auto">
-                Translate a NAMASTE code to its corresponding ICD-11 code
-            </p>
-        </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="text-6xl mb-4">🔗</div>
+        <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+          Translate Medical Codes
+        </h1>
+        <p class="text-xl text-green-100 max-w-2xl mx-auto">
+          Translate a NAMASTE code to its corresponding ICD-11 code
+        </p>
+      </div>
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8 card-hover">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold text-gray-800 mb-2">Code Translation</h2>
-                <p class="text-gray-600">Enter a NAMASTE code to get its ICD-11 mapping</p>
-            </div>
-            
-            <div class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
-                <div class="flex-1 relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <i class="fa-solid fa-code text-gray-400"></i>
-                    </div>
-                    <input 
-                        type="text" 
-                        id="codeInput"
-                        placeholder="Enter a NAMASTE code (e.g., AAA-1)..."
-                        class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-0 search-glow text-lg transition-all duration-200"
-                    >
-                </div>
-                <button 
-                    onclick="translateCode()" 
-                    class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                >
-                    <span class="flex items-center justify-center space-x-2">
-                        <i class="fa-solid fa-arrow-right-arrow-left"></i>
-                        <span>Translate</span>
-                    </span>
-                </button>
-            </div>
-
-            <div class="mt-6 text-center">
-                <p class="text-sm text-gray-500 mb-3">Quick translations:</p>
-                <div class="flex flex-wrap justify-center gap-2">
-                    <button onclick="quickTranslate('AAA-1')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">AAA-1</button>
-                    <button onclick="quickTranslate('BBB-2')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">BBB-2</button>
-                    <button onclick="quickTranslate('CCC-3')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">CCC-3</button>
-                    <button onclick="quickTranslate('DDD-4')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">DDD-4</button>
-                    <button onclick="quickTranslate('EEE-5')" class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200">EEE-5</button>
-                </div>
-            </div>
+      <div class="bg-white rounded-2xl shadow-xl p-8 mb-8 card-hover">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">
+            Code Translation
+          </h2>
+          <p class="text-gray-600">
+            Enter a NAMASTE code to get its ICD-11 mapping
+          </p>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
-            <div class="bg-gradient-to-r from-green-600 to-green-700 p-6">
-                <div class="flex items-center space-x-3">
-                    <div class="text-3xl">➡️</div>
-                    <div>
-                        <h3 class="text-2xl font-bold text-white">Translation Result</h3>
-                        <p class="text-green-100">Mapped ICD-11 Code</p>
-                    </div>
-                </div>
+        <div class="flex flex-col md:flex-row gap-4 max-w-xl mx-auto">
+          <div class="flex-1 relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+            >
+              <i class="fa-solid fa-code text-gray-400"></i>
             </div>
-            <div class="p-6">
-                <div id="translationResult" class="space-y-4">
-                    <div class="text-center py-12 text-gray-500">
-                        <div class="text-4xl mb-4">✍️</div>
-                        <p class="text-lg">Enter a NAMASTE code above to begin</p>
-                        <p class="text-sm mt-2">The translated ICD-11 code will be displayed here.</p>
-                    </div>
-                </div>
-            </div>
+            <input
+              type="text"
+              id="codeInput"
+              placeholder="Enter a NAMASTE code (e.g., AAA-1)..."
+              class="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:ring-0 search-glow text-lg transition-all duration-200"
+            />
+          </div>
+          <button
+            onclick="translateCode()"
+            class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <span class="flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-arrow-right-arrow-left"></i>
+              <span>Translate</span>
+            </span>
+          </button>
         </div>
 
-        <div id="selectedCodesPanel" class="hidden mt-8 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 p-8">
-            <div class="text-center mb-6">
-                <h3 class="text-2xl font-bold text-green-800 mb-2">Selected Medical Codes</h3>
-                <p class="text-green-600">Review your selected codes before proceeding</p>
-            </div>
-            <div id="selectedCodesList" class="space-y-3 mb-6"></div>
-            <div class="text-center">
-                <button 
-                    onclick="proceedToEncounter()" 
-                    class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
-                >
-                    <span class="flex items-center justify-center space-x-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                        <span>Proceed to Patient Encounter</span>
-                    </span>
-                </button>
-            </div>
+        <div class="mt-6 text-center">
+          <p class="text-sm text-gray-500 mb-3">Quick translations:</p>
+          <div class="flex flex-wrap justify-center gap-2">
+            <button
+              onclick="quickTranslate('AAA-1')"
+              class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200"
+            >
+              AAA-1
+            </button>
+            <button
+              onclick="quickTranslate('AAB-61')"
+              class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200"
+            >
+              AAB-61
+            </button>
+            <button
+              onclick="quickTranslate('AAB-64')"
+              class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200"
+            >
+              AAB-64
+            </button>
+            <button
+              onclick="quickTranslate('EB-6.2')"
+              class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200"
+            >
+              EB-6.2
+            </button>
+            <button
+              onclick="quickTranslate('EB-7')"
+              class="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm hover:bg-green-200 transition-colors duration-200"
+            >
+              EB-7
+            </button>
+          </div>
         </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
+        <div class="bg-gradient-to-r from-green-600 to-green-700 p-6">
+          <div class="flex items-center space-x-3">
+            <div class="text-3xl">➡️</div>
+            <div>
+              <h3 class="text-2xl font-bold text-white">Translation Result</h3>
+              <p class="text-green-100">Mapped ICD-11 Code</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-6">
+          <div id="translationResult" class="space-y-4">
+            <div class="text-center py-12 text-gray-500">
+              <div class="text-4xl mb-4">✍️</div>
+              <p class="text-lg">Enter a NAMASTE code above to begin</p>
+              <p class="text-sm mt-2">
+                The translated ICD-11 code will be displayed here.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="selectedCodesPanel"
+        class="hidden mt-8 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl border-2 border-green-200 p-8"
+      >
+        <div class="text-center mb-6">
+          <h3 class="text-2xl font-bold text-green-800 mb-2">
+            Selected Medical Codes
+          </h3>
+          <p class="text-green-600">
+            Review your selected codes before proceeding
+          </p>
+        </div>
+        <div id="selectedCodesList" class="space-y-3 mb-6"></div>
+        <div class="text-center">
+          <button
+            onclick="proceedToEncounter()"
+            class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            <span class="flex items-center justify-center space-x-2">
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+              <span>Proceed to Patient Encounter</span>
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
 
-    <footer class="bg-gray-800 text-gray-300 mt-auto">
-        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
-                    <i class="fa-solid fa-heart-pulse"></i> AYUSH Dual Coding
-                </h3>
-                <p class="mt-2 text-sm">
-                    Professional medical coding platform for healthcare integration
-                </p>
-                <div class="mt-3 flex space-x-4 text-sm">
-                    <a href="#" class="hover:text-white">Privacy Policy</a>
-                    <a href="#" class="hover:text-white">Terms of Service</a>
-                </div>
-            </div>
-            <div>
-                <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
-                    <i class="fa-solid fa-link"></i> Navigation
-                </h3>
-                <ul class="mt-2 space-y-2 text-sm">
-                    <li><a href="index.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-home"></i>Home</a></li>
-                    <li><a href="Search-Codes.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-magnifying-glass"></i>Search Codes</a></li>
-                    <li><a href="Encounter.html" class="flex items-center gap-2 hover:text-white"><i class="fa-regular fa-file-lines"></i>Add Encounter</a></li>
-                    <li><a href="about.html" class="flex items-center gap-2 hover:text-white"><i class="fa-solid fa-circle-info"></i>About</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
-                    <i class="fa-solid fa-award"></i> SIH 2025
-                </h3>
-                <ul class="mt-2 space-y-2 text-sm">
-                    <li>Smart India Hackathon 2025</li>
-                    <li>Team Elite ES6</li>
-                    <li>Ministry of AYUSH</li>
-                </ul>
-            </div>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300">
+      <div
+        class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8"
+      >
+        <div>
+          <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
+            <i class="fa-solid fa-heart-pulse"></i> AYUSH Dual Coding
+          </h3>
+          <p class="mt-2 text-sm">
+            Professional medical coding platform for healthcare integration
+          </p>
+          <div class="mt-3 flex space-x-4 text-sm">
+            <a href="#" class="hover:text-white">Privacy Policy</a>
+            <a href="#" class="hover:text-white">Terms of Service</a>
+          </div>
         </div>
-        <div class="border-t border-gray-600 text-center py-4 text-sm">
-            © 2025 AYUSH Dual Coding System. All rights reserved.
+        <div>
+          <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
+            <i class="fa-solid fa-link"></i> Navigation
+          </h3>
+          <ul class="mt-2 space-y-2 text-sm">
+            <li>
+              <a
+                href="index.html"
+                class="flex items-center gap-2 hover:text-white"
+                ><i class="fa-solid fa-home"></i>Home</a
+              >
+            </li>
+            <li>
+              <a
+                href="search-codes.html"
+                class="flex items-center gap-2 hover:text-white"
+                ><i class="fa-solid fa-magnifying-glass"></i>Search Codes</a
+              >
+            </li>
+            <li>
+              <a
+                href="search.html"
+                class="flex items-center gap-2 hover:text-white"
+                ><i class="fa-solid fa-magnifying-glass"></i>Search Diseases</a
+              >
+            </li>
+            <li>
+              <a
+                href="encounter.html"
+                class="flex items-center gap-2 hover:text-white"
+                ><i class="fa-regular fa-file-lines"></i>Add Encounter</a
+              >
+            </li>
+            <li>
+              <a
+                href="about.html"
+                class="flex items-center gap-2 hover:text-white"
+                ><i class="fa-solid fa-circle-info"></i>About</a
+              >
+            </li>
+          </ul>
         </div>
+        <!-- Column 3 -->
+        <div>
+          <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
+            <i class="fa-solid fa-award"></i> SIH 2025
+          </h3>
+          <ul class="mt-2 space-y-2 text-sm">
+            <li>Smart India Hackathon 2025</li>
+            <li>Team Elite ES6</li>
+            <li>Ministry of AYUSH</li>
+          </ul>
+        </div>
+      </div>
+      <!-- Bottom copyright -->
+      <div class="border-t border-gray-600 text-center py-4 text-sm">
+        © 2025 AYUSH Dual Coding System. All rights reserved.
+      </div>
     </footer>
-
     <script>
-        let selectedCodes = [];
+      let selectedCodes = [];
 
-        async function translateCode() {
-            const code = document.getElementById('codeInput').value.trim();
-            if (!code) {
-                showAlert('Please enter a NAMASTE code.', 'warning');
-                return;
-            }
+      async function translateCode() {
+        const code = document.getElementById("codeInput").value.trim();
+        if (!code) {
+          showAlert("Please enter a NAMASTE code.", "warning");
+          return;
+        }
 
-            // Show a loading state
-            const resultPanel = document.getElementById('translationResult');
-            resultPanel.innerHTML = `
+        // Show a loading state
+        const resultPanel = document.getElementById("translationResult");
+        resultPanel.innerHTML = `
                 <div class="text-center py-12">
                     <div class="loading-spinner mx-auto mb-4"></div>
                     <p class="text-gray-500">Translating code...</p>
                 </div>
             `;
 
-            try {
-                const systemUrl = encodeURIComponent("http://ayush.gov.in/fhir/CodeSystem/namaste");
-                const targetUrl = encodeURIComponent("http://id.who.int/icd/release/11/mms");
-                
-                const res = await fetch(`http://localhost:5000/api/v1/codes/translate?system=${systemUrl}&code=${encodeURIComponent(code)}&target=${targetUrl}`);
-                
-                const data = await res.json();
-                
-                if (!res.ok) {
-                    throw new Error(data.message || 'Translation failed.');
-                }
+        try {
+          const systemUrl = encodeURIComponent(
+            "http://ayush.gov.in/fhir/CodeSystem/namaste"
+          );
+          const targetUrl = encodeURIComponent(
+            "http://id.who.int/icd/release/11/mms"
+          );
 
-                // Check for a valid map in the response
-                if (data.map && data.map.ICD11Code) {
-                    displayTranslationResult(data.map);
-                } else {
-                    displayTranslationResult(null, 'No corresponding ICD-11 code found.');
-                }
+          const res = await fetch(
+            `http://localhost:5000/api/v1/codes/translate?system=${systemUrl}&code=${encodeURIComponent(
+              code
+            )}&target=${targetUrl}`
+          );
 
-            } catch (error) {
-                console.error('Translation error:', error);
-                displayTranslationResult(null, `Error: ${error.message}`);
-                showAlert(`Error: ${error.message}`, 'error');
-            }
+          const data = await res.json();
+
+          if (!res.ok) {
+            throw new Error(data.message || "Translation failed.");
+          }
+
+          // Check for a valid map in the response
+          if (data.map && data.map.ICD11Code) {
+            displayTranslationResult(data.map);
+          } else {
+            displayTranslationResult(
+              null,
+              "No corresponding ICD-11 code found."
+            );
+          }
+        } catch (error) {
+          console.error("Translation error:", error);
+          displayTranslationResult(null, `Error: ${error.message}`);
+          showAlert(`Error: ${error.message}`, "error");
         }
-        
-        function quickTranslate(code) {
-            document.getElementById('codeInput').value = code;
-            translateCode();
-        }
+      }
 
-        function displayTranslationResult(map, errorMessage) {
-            const resultPanel = document.getElementById('translationResult');
-            resultPanel.innerHTML = '';
+      function quickTranslate(code) {
+        document.getElementById("codeInput").value = code;
+        translateCode();
+      }
 
-            if (map) {
-                const resultHtml = `
+      function displayTranslationResult(map, errorMessage) {
+        const resultPanel = document.getElementById("translationResult");
+        resultPanel.innerHTML = "";
+
+        if (map) {
+          const resultHtml = `
                     <div class="result-item border-2 border-gray-200 rounded-xl p-4 transition-all duration-200 hover:border-green-300 hover:bg-green-50 fade-in">
                         <div class="flex justify-between items-start">
                             <div class="flex-1">
@@ -322,53 +475,72 @@
                         </div>
                     </div>
                 `;
-                resultPanel.insertAdjacentHTML('beforeend', resultHtml);
-            } else {
-                resultPanel.innerHTML = `
+          resultPanel.insertAdjacentHTML("beforeend", resultHtml);
+        } else {
+          resultPanel.innerHTML = `
                     <div class="text-center py-12 text-gray-500 fade-in">
                         <div class="text-4xl mb-4">⚠️</div>
                         <p class="text-lg">Translation Failed</p>
-                        <p class="text-sm mt-2">${errorMessage || 'An unknown error occurred.'}</p>
+                        <p class="text-sm mt-2">${
+                          errorMessage || "An unknown error occurred."
+                        }</p>
                     </div>
                 `;
-            }
+        }
+      }
+
+      function addTranslatedCode(
+        namasteCode,
+        namasteDisplay,
+        icd11Code,
+        icd11Display
+      ) {
+        const existingCode = selectedCodes.find(
+          (c) => c.namaste.code === namasteCode
+        );
+        if (existingCode) {
+          showAlert("This code pair has already been added.", "warning");
+          return;
         }
 
-        function addTranslatedCode(namasteCode, namasteDisplay, icd11Code, icd11Display) {
-            const existingCode = selectedCodes.find(c => c.namaste.code === namasteCode);
-            if (existingCode) {
-                showAlert('This code pair has already been added.', 'warning');
-                return;
-            }
+        selectedCodes.push({
+          namaste: { code: namasteCode, display: namasteDisplay },
+          icd11: { code: icd11Code, display: icd11Display },
+          timestamp: new Date().toISOString(),
+        });
 
-            selectedCodes.push({
-                namaste: { code: namasteCode, display: namasteDisplay },
-                icd11: { code: icd11Code, display: icd11Display },
-                timestamp: new Date().toISOString()
-            });
+        updateSelectedCodesPanel();
+        showAlert(`Code pair added successfully!`, "success");
+      }
 
-            updateSelectedCodesPanel();
-            showAlert(`Code pair added successfully!`, 'success');
-        }
+      function updateSelectedCodesPanel() {
+        const panel = document.getElementById("selectedCodesPanel");
+        const list = document.getElementById("selectedCodesList");
 
-        function updateSelectedCodesPanel() {
-            const panel = document.getElementById('selectedCodesPanel');
-            const list = document.getElementById('selectedCodesList');
+        if (selectedCodes.length > 0) {
+          panel.classList.remove("hidden");
+          panel.classList.add("fade-in");
 
-            if (selectedCodes.length > 0) {
-                panel.classList.remove('hidden');
-                panel.classList.add('fade-in');
-                
-                list.innerHTML = selectedCodes.map((code, index) => `
+          list.innerHTML = selectedCodes
+            .map(
+              (code, index) => `
                     <div class="bg-white rounded-xl p-4 border border-green-200 shadow-sm">
                         <div class="flex justify-between items-start">
                             <div class="flex-1">
                                 <div class="flex items-center space-x-2 mb-2">
-                                    <span class="badge-namaste text-white px-3 py-1 rounded-full text-sm font-semibold">${code.namaste.code}</span>
-                                    <span class="badge-icd11 text-white px-3 py-1 rounded-full text-sm font-semibold">${code.icd11.code}</span>
+                                    <span class="badge-namaste text-white px-3 py-1 rounded-full text-sm font-semibold">${
+                                      code.namaste.code
+                                    }</span>
+                                    <span class="badge-icd11 text-white px-3 py-1 rounded-full text-sm font-semibold">${
+                                      code.icd11.code
+                                    }</span>
                                 </div>
-                                <h4 class="font-semibold text-gray-800">${code.namaste.display} / ${code.icd11.display}</h4>
-                                <p class="text-xs text-gray-500 mt-1">Added: ${new Date(code.timestamp).toLocaleString()}</p>
+                                <h4 class="font-semibold text-gray-800">${
+                                  code.namaste.display
+                                } / ${code.icd11.display}</h4>
+                                <p class="text-xs text-gray-500 mt-1">Added: ${new Date(
+                                  code.timestamp
+                                ).toLocaleString()}</p>
                             </div>
                             <button 
                                 onclick="removeCode(${index})"
@@ -378,65 +550,72 @@
                             </button>
                         </div>
                     </div>
-                `).join('');
-            } else {
-                panel.classList.add('hidden');
-            }
+                `
+            )
+            .join("");
+        } else {
+          panel.classList.add("hidden");
+        }
+      }
+
+      function removeCode(index) {
+        const removedCode = selectedCodes[index];
+        selectedCodes.splice(index, 1);
+        updateSelectedCodesPanel();
+        showAlert(`Code pair for ${removedCode.namaste.code} removed`, "info");
+      }
+
+      function proceedToEncounter() {
+        if (selectedCodes.length === 0) {
+          showAlert(
+            "Please select at least one code pair before proceeding",
+            "warning"
+          );
+          return;
         }
 
-        function removeCode(index) {
-            const removedCode = selectedCodes[index];
-            selectedCodes.splice(index, 1);
-            updateSelectedCodesPanel();
-            showAlert(`Code pair for ${removedCode.namaste.code} removed`, 'info');
-        }
+        const selectedCodesString = JSON.stringify(selectedCodes);
+        localStorage.setItem("selectedCodes", selectedCodesString);
+        window.location.href = "Encounter.html";
+      }
 
-        function proceedToEncounter() {
-            if (selectedCodes.length === 0) {
-                showAlert('Please select at least one code pair before proceeding', 'warning');
-                return;
-            }
-            
-            const selectedCodesString = JSON.stringify(selectedCodes);
-            localStorage.setItem('selectedCodes', selectedCodesString);
-            window.location.href = 'Encounter.html';
-        }
+      function showAlert(message, type) {
+        const alertColors = {
+          success: "bg-green-100 border-green-400 text-green-700",
+          warning: "bg-yellow-100 border-yellow-400 text-yellow-700",
+          error: "bg-red-100 border-red-400 text-red-700",
+          info: "bg-blue-100 border-blue-400 text-blue-700",
+        };
 
-        function showAlert(message, type) {
-            const alertColors = {
-                success: 'bg-green-100 border-green-400 text-green-700',
-                warning: 'bg-yellow-100 border-yellow-400 text-yellow-700',
-                error: 'bg-red-100 border-red-400 text-red-700',
-                info: 'bg-blue-100 border-blue-400 text-blue-700'
-            };
-
-            const alert = document.createElement('div');
-            alert.className = `fixed top-4 right-4 z-50 ${alertColors[type]} border px-4 py-3 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
-            alert.innerHTML = `
+        const alert = document.createElement("div");
+        alert.className = `fixed top-4 right-4 z-50 ${alertColors[type]} border px-4 py-3 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
+        alert.innerHTML = `
                 <div class="flex items-center space-x-2">
                     <span>${message}</span>
                     <button onclick="this.parentElement.parentElement.remove()" class="ml-2 font-bold">&times;</button>
                 </div>
             `;
-            document.body.appendChild(alert);
-            
-            setTimeout(() => {
-                alert.classList.remove('translate-x-full');
-            }, 100);
+        document.body.appendChild(alert);
 
-            setTimeout(() => {
-                alert.classList.add('translate-x-full');
-                setTimeout(() => alert.remove(), 300);
-            }, 3000);
-        }
+        setTimeout(() => {
+          alert.classList.remove("translate-x-full");
+        }, 100);
 
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('codeInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    translateCode();
-                }
-            });
-        });
+        setTimeout(() => {
+          alert.classList.add("translate-x-full");
+          setTimeout(() => alert.remove(), 300);
+        }, 3000);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .getElementById("codeInput")
+          .addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+              translateCode();
+            }
+          });
+      });
     </script>
-</body>
+  </body>
 </html>
