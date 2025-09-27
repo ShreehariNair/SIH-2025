@@ -157,7 +157,7 @@
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center gap-4">
-            <div class="text-primary size-8">
+            <div class="text-green-600 size-8">
               <svg
                 fill="none"
                 viewBox="0 0 48 48"
@@ -165,13 +165,11 @@
               >
                 <path
                   d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"
-                  fill="#39e079"
+                  fill="currentColor"
                 ></path>
               </svg>
             </div>
-            <h2 class="text-lg font-bold text-slate-900 dark:text-white">
-              NamasteFHIR
-            </h2>
+            <h2 class="text-lg font-bold text-black">AYUSH</h2>
           </div>
           <nav class="hidden md:flex items-center gap-8">
             <a
@@ -210,7 +208,6 @@
       </div>
     </header>
 
-    <!-- Header Section -->
     <div class="gradient-bg py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div class="text-6xl mb-4">📋</div>
@@ -224,9 +221,7 @@
       </div>
     </div>
 
-    <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <!-- Patient Search Section -->
       <div class="bg-white rounded-2xl shadow-xl p-8 mb-8 card-hover">
         <div class="text-center mb-8">
           <h2 class="text-2xl font-bold text-gray-800 mb-2">
@@ -290,7 +285,6 @@
           </button>
         </div>
 
-        <!-- Quick Patient Access -->
         <div class="mt-6 text-center">
           <p class="text-sm text-gray-500 mb-3">
             Quick access to recent patients:
@@ -417,7 +411,6 @@
           </form>
         </div>
       </div>
-      <!-- Patient Information Display -->
       <div id="patientInfoSection" class="hidden mb-8">
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
           <div class="bg-gradient-to-r from-green-600 to-green-500 p-6">
@@ -476,9 +469,7 @@
         </div>
       </div>
 
-      <!-- Current Encounter Section -->
       <div class="grid lg:grid-cols-2 gap-8 mb-8">
-        <!-- Add New Diagnosis -->
         <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
           <div class="flex items-center space-x-3 mb-6">
             <div
@@ -506,54 +497,24 @@
               <label class="block text-sm font-medium text-gray-700 mb-2"
                 >NAMASTE Code</label
               >
-              <select
+              <input
+                type="text"
                 id="namasteCodeSelect"
                 class="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-0 transition-all duration-200"
-              >
-                <option value="">Select NAMASTE Code</option>
-                <option value="AYU001|Fever (Jwara)">
-                  AYU001 - Fever (Jwara)
-                </option>
-                <option value="AYU002|Headache (Shiroroga)">
-                  AYU002 - Headache (Shiroroga)
-                </option>
-                <option value="YOG001|Stress Management">
-                  YOG001 - Stress Management
-                </option>
-                <option value="UNA001|Cold (Nazla)">
-                  UNA001 - Cold (Nazla)
-                </option>
-                <option value="HOM001|Anxiety (Chinta)">
-                  HOM001 - Anxiety (Chinta)
-                </option>
-              </select>
+                placeholder="Enter NAMASTE Code"
+              />
             </div>
 
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2"
                 >ICD-11 Code</label
               >
-              <select
+              <input
+                type="text"
                 id="icd11CodeSelect"
                 class="w-full p-3 border-2 border-gray-200 rounded-lg focus:border-green-500 focus:ring-0 transition-all duration-200"
-              >
-                <option value="">Select ICD-11 Code</option>
-                <option value="MG50|Fever, unspecified">
-                  MG50 - Fever, unspecified
-                </option>
-                <option value="MB40.0|Tension-type headache">
-                  MB40.0 - Tension-type headache
-                </option>
-                <option value="QE10|Stress-related disorders">
-                  QE10 - Stress-related disorders
-                </option>
-                <option value="CA40|Acute upper respiratory infections">
-                  CA40 - Acute upper respiratory infections
-                </option>
-                <option value="QA40|Anxiety disorders">
-                  QA40 - Anxiety disorders
-                </option>
-              </select>
+                placeholder="Enter ICD-11 Code"
+              />
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-2"
@@ -577,7 +538,6 @@
           </form>
         </div>
 
-        <!-- Current Session Summary -->
         <div class="bg-white rounded-2xl shadow-xl p-6 card-hover">
           <div class="flex items-center space-x-3 mb-6">
             <div
@@ -627,7 +587,6 @@
         </div>
       </div>
       <div id="patientInfo" class="my-4"></div>
-      <!-- Patient History Section -->
       <div id="patientHistorySection" class="hidden">
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden card-hover">
           <div class="bg-gradient-to-r from-green-700 to-green-600 p-6">
@@ -650,20 +609,16 @@
             </div>
           </div>
           <div class="p-6">
-            <div id="patientHistoryContent">
-              <!-- History content will be loaded here -->
-            </div>
+            <div id="patientHistoryContent"></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-300">
+    <footer class="bg-gray-800 text-gray-300 mt-auto">
       <div
         class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8"
       >
-        <!-- Column 1 -->
         <div>
           <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
             <i class="fa-solid fa-heart-pulse"></i> AYUSH Dual Coding
@@ -676,7 +631,6 @@
             <a href="#" class="hover:text-white">Terms of Service</a>
           </div>
         </div>
-        <!-- Column 2 -->
         <div>
           <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
             <i class="fa-solid fa-link"></i> Navigation
@@ -719,7 +673,6 @@
             </li>
           </ul>
         </div>
-        <!-- Column 3 -->
         <div>
           <h3 class="flex items-center gap-2 text-white font-semibold text-lg">
             <i class="fa-solid fa-award"></i> SIH 2025
@@ -731,7 +684,6 @@
           </ul>
         </div>
       </div>
-      <!-- Bottom copyright -->
       <div class="border-t border-gray-600 text-center py-4 text-sm">
         © 2025 NamasteFHIR. All rights reserved.
       </div>
@@ -798,25 +750,24 @@
 
       // Adds a diagnosis to the current session
       function addDiagnosis() {
-        const namasteSelect = document.getElementById("namasteCodeSelect");
-        const icd11Select = document.getElementById("icd11CodeSelect");
+        const namasteCode = document
+          .getElementById("namasteCodeSelect")
+          .value.trim();
+        const icd11Code = document
+          .getElementById("icd11CodeSelect")
+          .value.trim();
         const clinicalNotes = document
           .getElementById("clinicalNotes")
           .value.trim();
 
-        const namasteCode = namasteSelect.value.split("|")[0];
-        const namasteDisplay = namasteSelect.value.split("|")[1];
-        const icd11Code = icd11Select.value.split("|")[0];
-        const icd11Display = icd11Select.value.split("|")[1];
-
         if (!namasteCode || !icd11Code) {
-          showAlert("Please select both NAMASTE and ICD-11 codes", "warning");
+          showAlert("Please enter both NAMASTE and ICD-11 codes", "warning");
           return;
         }
 
         const newDiagnosis = {
-          namaste: { code: namasteCode, display: namasteDisplay },
-          icd11: { code: icd11Code, display: icd11Display },
+          namaste: { code: namasteCode, display: namasteCode }, // Using code as display name for now
+          icd11: { code: icd11Code, display: icd11Code }, // Using code as display name for now
           notes: clinicalNotes,
           recordedAt: new Date().toISOString(),
         };
@@ -825,8 +776,8 @@
         updateCurrentSession();
 
         // Reset the form fields after adding
-        namasteSelect.value = "";
-        icd11Select.value = "";
+        document.getElementById("namasteCodeSelect").value = "";
+        document.getElementById("icd11CodeSelect").value = "";
         document.getElementById("clinicalNotes").value = "";
         showAlert("Diagnosis added to current session!", "success");
       }
@@ -1148,42 +1099,6 @@
       document
         .querySelector(".px-4.py-2.bg-blue-100")
         .addEventListener("click", showCreatePatientModal);
-    </script>
-
-    <script>
-      (function () {
-        function c() {
-          var b = a.contentDocument || a.contentWindow.document;
-          if (b) {
-            var d = b.createElement("script");
-            d.innerHTML =
-              "window.__CF$cv$params={r:'9821e992a39c8ee8',t:'MTc1ODM3NzQ5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
-            b.getElementsByTagName("head")[0].appendChild(d);
-          }
-        }
-        if (document.body) {
-          var a = document.createElement("iframe");
-          a.height = 1;
-          a.width = 1;
-          a.style.position = "absolute";
-          a.style.top = 0;
-          a.style.left = 0;
-          a.style.border = "none";
-          a.style.visibility = "hidden";
-          document.body.appendChild(a);
-          if ("loading" !== document.readyState) c();
-          else if (window.addEventListener)
-            document.addEventListener("DOMContentLoaded", c);
-          else {
-            var e = document.onreadystatechange || function () {};
-            document.onreadystatechange = function (b) {
-              e(b);
-              "loading" !== document.readyState &&
-                ((document.onreadystatechange = e), c());
-            };
-          }
-        }
-      })();
     </script>
   </body>
 </html>
