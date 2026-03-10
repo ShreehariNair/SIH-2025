@@ -1,6 +1,6 @@
 # SIH-2025
 
-**SIH-2025** is a comprehensive web application developed for the Smart India Hackathon 2025. This platform provides a robust solution for data management and visualization, featuring a full-stack architecture with a powerful backend API and an intuitive frontend interface for seamless user interaction.
+AYUSH Dual Coding System is a comprehensive healthcare interoperability platform that bridges traditional AYUSH (Ayurveda, Yoga, Unani, Siddha, Homeopathy) medical coding systems with international standards like ICD-11. The system enables seamless translation and mapping between NAMASTE codes (specialized AYUSH terminology) and WHO's ICD-11 classification, facilitating standardized healthcare data exchange and enabling AYUSH practitioners to maintain traditional diagnostic approaches while ensuring global interoperability. This solution addresses the critical gap in integrating traditional Indian medicine systems into modern electronic health record (EHR) systems, supporting both clinical documentation and cross-border healthcare data sharing.
 
 ---
 
